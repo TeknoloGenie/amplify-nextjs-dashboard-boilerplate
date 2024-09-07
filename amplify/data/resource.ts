@@ -14,10 +14,10 @@ const schema = a.schema({
     .authorization((allow) => [allow.publicApiKey()]),
   PlatformsConfiguration: a
     .model({
-      id: a.string().required(),
-      organization: a.belongsTo("Organization", "id"),
+      id: a.id(),
+      organization: a.belongsTo("Organization", "organizationId"),
       enabledPlatforms: a.string().array(),
-      organizationId: a.string(),
+      organizationId: a.id(),
       crmSettings: a.customType({
         string: a.string(),
         boolean: a.boolean(),
@@ -31,10 +31,10 @@ const schema = a.schema({
     })
     .authorization((allow) => [allow.owner()]),
   Organization: a.model({
-    id: a.string().required(),
+    id: a.id(),
     name: a.string(),
     address: a.integer(),
-    platformsConfiguration: a.hasOne("PlatformsConfiguration", "id"),
+    platformsConfiguration: a.hasOne("PlatformsConfiguration", "organizationId"),
     url: a.string(),
   })
   .authorization((allow) => [allow.owner()]),
