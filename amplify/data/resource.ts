@@ -34,7 +34,7 @@ const schema = a.schema({
     id: a.string().required(),
     name: a.string(),
     address: a.integer(),
-    platformsConfigurationId: a.hasOne("PlatformsConfiguration", "id"),
+    platformsConfiguration: a.hasOne("PlatformsConfiguration", "id"),
     url: a.string(),
   })
   .authorization((allow) => [allow.owner()]),
