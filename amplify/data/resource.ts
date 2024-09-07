@@ -12,6 +12,32 @@ const schema = a.schema({
       content: a.string(),
     })
     .authorization((allow) => [allow.publicApiKey()]),
+  PlatformsConfiguration: a
+    .model({
+      id: a.string().required(),
+      organization: a.belongsTo("Organization", "id"),
+      enabledPlatforms: a.string().array(),
+      organizationId: a.string(),
+      crmSettings: a.customType({
+        string: a.string(),
+        boolean: a.boolean(),
+        integer: a.integer(),
+        object: a.customType({
+          key1: a.string(),
+          key2: a.integer(),
+        }),
+        array: a.string().array(),
+      }),
+    })
+    .authorization((allow) => [allow.owner()]),
+  Organization: a.model({
+    id: a.string().required(),
+    name: a.string(),
+    address: a.integer(),
+    platformsConfigurationId: a.hasOne("PlatformsConfiguration", "id"),
+    url: a.string(),
+  })
+  .authorization((allow) => [allow.owner()]),
 });
 
 export type Schema = ClientSchema<typeof schema>;
