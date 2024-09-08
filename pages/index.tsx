@@ -29,14 +29,24 @@ export default function App() {
     client.models.Todo.delete({ id });
   }
 
+  function createConversation() {
+    client.models.Conversation.create({});
+  }
+
+  function addUserToConversation(userId: string, conversationId: string) {
+    client.models.UserConversations.create({userId, conversationId});
+  }
+  
+
   return (
         
     <Authenticator>
       {({ signOut }) => (
         <main>
           <button onClick={signOut}>Sign out</button>
-          <h1>My todos</h1>
+          <h1>Messages</h1>
           <button onClick={createTodo}>+ new</button>
+          <button onClick={createConversation}>+ new conversation</button>
           <ul>
             {todos.map((todo) => (
               <li key={todo.id} onClick={()=> deleteTodo(todo.id)}>{todo.content}</li>
