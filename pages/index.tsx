@@ -1,9 +1,6 @@
 import { useState, useEffect } from "react";
 import { generateClient } from "aws-amplify/data";
-import Modal from "../components/Modal";
 import type { Schema } from "@/amplify/data/resource";
-import SortableTable from '../components/Table';
-import { Authenticator, Card, Grid, Button } from '@aws-amplify/ui-react'
 import '@aws-amplify/ui-react/styles.css'
 
 const client = generateClient<Schema>();
