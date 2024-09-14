@@ -1,25 +1,47 @@
-## AWS Amplify Next.js (Pages) Starter Template
 
-This repository provides a starter template for creating applications using Next.js (Pages) and AWS Amplify, emphasizing easy setup for authentication, API, and database capabilities.
+# NextJS AWS Amplify Gen 2 Dashboard Boilerplate
 
-## Overview
-
-This template equips you with a foundational Next.js application integrated with AWS Amplify, streamlined for scalability and performance. It is ideal for developers looking to jumpstart their project with pre-configured AWS services like Cognito, AppSync, and DynamoDB.
+This project is a boilerplate for quickly setting up a dashboard-style application using NextJS, Tailwind CSS, AWS Amplify Gen 2, and Amplify UI. It's designed to help developers get up and running quickly with a modern, scalable, and cloud-ready web application.
 
 ## Features
 
-- **Authentication**: Setup with Amazon Cognito for secure user authentication.
-- **API**: Ready-to-use GraphQL endpoint with AWS AppSync.
-- **Database**: Real-time database powered by Amazon DynamoDB.
+- **NextJS**: React framework for production-grade applications
+- **Tailwind CSS**: Utility-first CSS framework for rapid UI development
+- **AWS Amplify Gen 2**: Simplified backend development with TypeScript
+- **Amplify UI**: Pre-built UI components for faster development
+- **Dashboard Layout**: Pre-configured layout for admin/dashboard applications
+- **Authentication**: Built-in authentication flow using AWS Cognito
+- **Responsive Design**: Mobile-friendly and responsive out of the box
 
-## Deploying to AWS
+## Prerequisites
 
-For detailed instructions on deploying your application, refer to the [deployment section](https://docs.amplify.aws/nextjs/start/quickstart/nextjs-pages-router/#deploy-a-fullstack-app-to-aws) of our documentation.
+- Node.js (v14.x or later)
+- npm or yarn
+- AWS Account
+- AWS CLI configured with your credentials
 
-## Security
+## Getting Started
 
-See [CONTRIBUTING](CONTRIBUTING.md#security-issue-notifications) for more information.
+- in progress
+
+## Customization
+
+- in progress
+
+## Deployment
+
+Follow AWS Guide at https://docs.amplify.aws/nextjs/start/quickstart/nextjs-pages-router/ starting at step 2, because you should have already forked this repository.
+
+## Contributing
+
+Contributions are welcome! Please feel free to submit a Pull Request.
 
 ## License
 
-This library is licensed under the MIT-0 License. See the LICENSE file.
+This project is licensed under the MIT License - see the LICENSE file for details.
+
+## Acknowledgments
+
+- NextJS team for the amazing React framework
+- Tailwind CSS for the utility-first CSS framework
+- AWS Amplify team for simplifying cloud development
