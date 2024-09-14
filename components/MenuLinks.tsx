@@ -1,10 +1,11 @@
 import React from 'react';
-import { Link } from '@aws-amplify/ui-react';
+import { Divider, Link } from '@aws-amplify/ui-react';
 import { useRouter } from 'next/router';
 
 interface MenuItem {
   path: string;
   label: string;
+  icon?: string;
   params?: Record<string, string>;
   preloadData?: () => Promise<any>;
 }
@@ -27,14 +28,19 @@ const MenuLinks: React.FC<MenuLinksProps> = ({ items }) => {
   };
 
   return (
-    <nav>
+    <nav className="grid grid-cols-1">
       {items.map((item, index) => (
-        <Link
-          key={index}
-          onClick={() => handleClick(item)}
-        >
-          {item.label}
-        </Link>
+        <>
+          <Link
+            className="min-w-full m-2"
+            key={index}
+            onClick={() => handleClick(item)}
+          >
+            {item.icon ? <i className={`m-2 ${item.icon}`} /> : null}
+            {item.label}
+          </Link>
+          <Divider className="divide-red-500" size="small" orientation="horizontal" />
+        </>
       ))}
     </nav>
   );
