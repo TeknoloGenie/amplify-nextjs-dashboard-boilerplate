@@ -5,6 +5,7 @@ import { Amplify } from "aws-amplify";
 import outputs from "@/amplify_outputs.json";
 import "@aws-amplify/ui-react/styles.css";
 import { Authenticator, Grid, Card, Button } from '@aws-amplify/ui-react'
+import MenuLinks from '@/components/MenuLinks';
 
 Amplify.configure(outputs);
 
@@ -19,7 +20,11 @@ export default function App({ Component, pageProps }: AppProps) {
 					</Button>
 					</Card>
 					<Card columnStart="1" columnEnd="2" >
-						Nav
+						<MenuLinks items={[
+							{ path: '/home', label: 'Home' },
+							{ path: '/about', label: 'About' },
+							{ path: '/contact', label: 'Contact' },
+						]} />
 					</Card>
 					<Card columnStart="2" columnEnd="-1" >
 						<Component {...pageProps} />
