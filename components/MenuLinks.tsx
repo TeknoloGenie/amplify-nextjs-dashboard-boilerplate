@@ -1,6 +1,6 @@
-import React from 'react';
-import { Divider, Link } from '@aws-amplify/ui-react';
-import { useRouter } from 'next/router';
+import React from "react";
+import { Divider, Link } from "@aws-amplify/ui-react";
+import { useRouter } from "next/router";
 
 interface MenuItem {
   path: string;

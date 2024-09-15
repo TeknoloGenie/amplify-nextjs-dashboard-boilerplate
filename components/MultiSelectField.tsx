@@ -1,5 +1,5 @@
-import React, { useState, useRef, useEffect } from 'react';
-import { Flex, CheckboxField, Text, Button, View, Input } from '@aws-amplify/ui-react';
+import React, { useState, useRef, useEffect } from "react";
+import { Flex, CheckboxField, Text, Button, View, Input } from "@aws-amplify/ui-react";
 
 interface Option {
   value: string;
@@ -24,9 +24,9 @@ const MultiSelectField: React.FC<MultiSelectFieldProps> = ({ options, onChange, 
       }
     }
 
-    document.addEventListener('mousedown', handleClickOutside);
+    document.addEventListener("mousedown", handleClickOutside);
     return () => {
-      document.removeEventListener('mousedown', handleClickOutside);
+      document.removeEventListener("mousedown", handleClickOutside);
     };
   }, []);
 
@@ -47,42 +47,42 @@ const MultiSelectField: React.FC<MultiSelectFieldProps> = ({ options, onChange, 
     return selectedOptions
       .map(value => options.find(option => option.value === value)?.label)
       .filter(Boolean)
-      .join(', ');
+      .join(", ");
   };
 
   return (
-    <Flex direction="column" style={{ position: 'relative', overflow: 'visible' }} ref={wrapperRef}>
+    <Flex direction="column" style={{ position: "relative", overflow: "visible" }} ref={wrapperRef}>
       <Text>{label}</Text>
       <Flex direction="row" alignItems="center">
         <View
           width="100%"
           onClick={toggleOptions}
-          style={{ cursor: 'pointer' }}
+          style={{ cursor: "pointer" }}
         >
           <Input
             readOnly
             value={getSelectedLabels()}
             placeholder="Select options"
-            style={{ cursor: 'pointer' }}
+            style={{ cursor: "pointer" }}
           />
         </View>
         <Button onClick={toggleOptions} variation="primary">
-          {isOpen ? '▲' : '▼'}
+          {isOpen ? "▲" : "▼"}
         </Button>
       </Flex>
       <View
         style={{
-          position: 'absolute',
-          top: 'calc(100% + 4px)',
+          position: "absolute",
+          top: "calc(100% + 4px)",
           left: 0,
           right: 0,
-          maxHeight: '200px',
-          overflowY: 'auto',
-          backgroundColor: 'var(--amplify-colors-background-secondary)',
-          boxShadow: '0 2px 4px rgba(0,0,0,0.1)',
+          maxHeight: "200px",
+          overflowY: "auto",
+          backgroundColor: "var(--amplify-colors-background-secondary)",
+          boxShadow: "0 2px 4px rgba(0,0,0,0.1)",
           opacity: isOpen ? 1 : 0,
-          visibility: isOpen ? 'visible' : 'hidden',
-          transition: 'opacity 0.2s, visibility 0.2s',
+          visibility: isOpen ? "visible" : "hidden",
+          transition: "opacity 0.2s, visibility 0.2s",
           zIndex: 10,
         }}
       >

@@ -4,9 +4,9 @@ import type { AppProps } from "next/app";
 import { Amplify } from "aws-amplify";
 import outputs from "@/amplify_outputs.json";
 import "@aws-amplify/ui-react/styles.css";
-import { Authenticator, Grid, Card, Button, Text, Flex, Heading, View } from '@aws-amplify/ui-react'
-import MenuLinks from '@/components/MenuLinks';
-import 'tailwindcss/tailwind.css'
+import { Authenticator, Grid, Card, Button, Text, Flex, Heading, View } from "@aws-amplify/ui-react"
+import MenuLinks from "@/components/MenuLinks";
+import "tailwindcss/tailwind.css"
 Amplify.configure(outputs);
 
 export default function App({ Component, pageProps }: AppProps) {
@@ -14,11 +14,11 @@ export default function App({ Component, pageProps }: AppProps) {
 		<Authenticator>
 			{({ signOut, user }) => (
 				<View style={{
-				  display: 'grid',
-				  gridTemplateColumns: '250px 1fr',
-				  gridTemplateRows: 'auto 1fr auto',
-				  height: '100vh',
-				  gap: '1rem'
+				  display: "grid",
+				  gridTemplateColumns: "250px 1fr",
+				  gridTemplateRows: "auto 1fr auto",
+				  height: "100vh",
+				  gap: "1rem"
 				}}>
 				  {/* Header */}
 				  <View columnSpan={2}>
@@ -37,17 +37,17 @@ export default function App({ Component, pageProps }: AppProps) {
 					<Card>
 					  <MenuLinks
 						items={[
-						  { path: '/components/modal', label: 'Modal' },
-						  { path: '/components/menu-links', label: 'MenuLinks' },
-						  { path: '/components/table', label: 'Table' },
-						  { path: '/components/multi-select-field', label: 'MultiSelectField' },
+						  { path: "/components/modal", label: "Modal" },
+						  { path: "/components/menu-links", label: "MenuLinks" },
+						  { path: "/components/table", label: "Table" },
+						  { path: "/components/multi-select-field", label: "MultiSelectField" },
 						]}
 					  />
 					</Card>
 				  </View>
 				
 				  {/* Main Content */}
-				  <View style={{ overflowY: 'auto' }}>
+				  <View style={{ overflowY: "auto" }}>
 					<Card>
 					  <Component {...pageProps} />
 					</Card>

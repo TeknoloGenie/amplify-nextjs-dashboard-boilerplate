@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { Card, Flex, View, Icon } from '@aws-amplify/ui-react';
+import React, { useState } from "react";
+import { Card, Flex, View, Icon } from "@aws-amplify/ui-react";
 
 interface OrderedListProps {
   value: Array<Record<string, any>>;
@@ -16,7 +16,7 @@ const OrderedList: React.FC<OrderedListProps> = ({ value, onOrderChange }) => {
   const handleDragStart = (e: React.DragEvent | React.TouchEvent, index: number) => {
     dragItem.current = index;
     dragNode.current = e.target as HTMLElement;
-    dragNode.current.addEventListener('dragend', handleDragEnd);
+    dragNode.current.addEventListener("dragend", handleDragEnd);
     setTimeout(() => {
       setDragging(true);
     }, 0);
@@ -26,7 +26,7 @@ const OrderedList: React.FC<OrderedListProps> = ({ value, onOrderChange }) => {
   const handleDragEnd = () => {
     setDragging(false);
     setDraggedIndex(null);
-    dragNode.current?.removeEventListener('dragend', handleDragEnd);
+    dragNode.current?.removeEventListener("dragend", handleDragEnd);
     dragItem.current = null;
     dragNode.current = null;
   };
@@ -35,7 +35,7 @@ const OrderedList: React.FC<OrderedListProps> = ({ value, onOrderChange }) => {
     e.preventDefault();
     const currentItem = dragItem.current;
     if (currentItem !== null) {
-      const targetIndex = (e.target as HTMLElement).closest('[data-index]')?.getAttribute('data-index');
+      const targetIndex = (e.target as HTMLElement).closest("[data-index]")?.getAttribute("data-index");
       if (targetIndex && currentItem !== parseInt(targetIndex)) {
         handleDrop(parseInt(targetIndex));
       }
@@ -68,7 +68,7 @@ const OrderedList: React.FC<OrderedListProps> = ({ value, onOrderChange }) => {
           data-index={index}
           style={{
             opacity: dragging && draggedIndex === index ? 0.5 : 1,
-            border: dragging && draggedIndex === index ? '2px dashed #007bff' : undefined
+            border: dragging && draggedIndex === index ? "2px dashed #007bff" : undefined
           }}
           aria-grabbed={dragging && draggedIndex === index}
           aria-dropeffect="move"
@@ -91,13 +91,13 @@ const OrderedList: React.FC<OrderedListProps> = ({ value, onOrderChange }) => {
                 ariaLabel="Drag handle"
                 viewBox={{ width: 24, height: 24 }}
                 paths={[
-                  { d: 'M10 9h4V6h3l-5-5-5 5h3v3zm-1 1H6V7l-5 5 5 5v-3h3v-4zm14 2l-5-5v3h-3v4h3v3l5-5zm-9 3h-4v3H7l5 5 5-5h-3v-3z' },
+                  { d: "M10 9h4V6h3l-5-5-5 5h3v3zm-1 1H6V7l-5 5 5 5v-3h3v-4zm14 2l-5-5v3h-3v4h3v3l5-5zm-9 3h-4v3H7l5 5 5-5h-3v-3z" },
                 ]}
               />
             </View>
-            <Flex direction="column" style={{ userSelect: 'none' }}>
+            <Flex direction="column" style={{ userSelect: "none" }}>
               {Object.entries(item).map(([key, value]) => (
-                key !== 'order' && <p key={key}>{`${key}: ${value}`}</p>
+                key !== "order" && <p key={key}>{`${key}: ${value}`}</p>
               ))}
             </Flex>
           </Flex>

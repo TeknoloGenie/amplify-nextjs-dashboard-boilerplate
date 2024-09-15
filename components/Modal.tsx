@@ -1,5 +1,5 @@
-import React from 'react';
-import { Card, Button } from '@aws-amplify/ui-react';
+import React from "react";
+import { Card, Button } from "@aws-amplify/ui-react";
 
 interface ModalProps {
   isOpen: boolean;

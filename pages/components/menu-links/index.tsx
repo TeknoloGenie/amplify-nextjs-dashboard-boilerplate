@@ -1,25 +1,25 @@
-import React from 'react';
-import MenuLinks from '@/components/MenuLinks';
+import React from "react";
+import MenuLinks from "@/components/MenuLinks";
 
 const MenuLinksExample = () => {
   const menuItems = [
     {
-      path: '/home',
-      label: 'Home',
+      path: "/home",
+      label: "Home",
       preloadData: async () => {
         // Simulating data preloading
         await new Promise(resolve => setTimeout(resolve, 1000));
-        console.log('Home data preloaded');
+        console.log("Home data preloaded");
       },
     },
     {
-      path: '/about',
-      label: 'About',
-      params: { id: '123' },
+      path: "/about",
+      label: "About",
+      params: { id: "123" },
     },
     {
-      path: '/contact',
-      label: 'Contact',
+      path: "/contact",
+      label: "Contact",
     },
   ];
 
