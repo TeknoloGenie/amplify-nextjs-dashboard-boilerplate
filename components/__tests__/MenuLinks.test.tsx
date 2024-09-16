@@ -1,6 +1,6 @@
 import React from 'react';
 import { render, fireEvent, waitFor } from '@testing-library/react';
-import MenuLinks from '@/components/MenuLinks';
+import MenuLinks from '../MenuLinks';
 
 jest.mock('next/router', () => ({
   useRouter() {
