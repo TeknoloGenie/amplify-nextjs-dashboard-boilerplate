@@ -42,6 +42,7 @@ export default function App({ Component, pageProps }: AppProps) {
 						  { path: "/components/table", label: "Table" },
 						  { path: "/components/multi-select-field", label: "MultiSelectField" },
 						  { path: "/components/chip", label: "Chip" },
+						  { path: "/components/autocomplete", label: "Autocomplete" },
 						]}
 					  />
 					</Card>
