@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from 'react';
-import { Flex, Text, View, Input, Button } from '@aws-amplify/ui-react';
+import React, { useState, useEffect } from "react";
+import { Flex, Text, View, Input, Button } from "@aws-amplify/ui-react";
 
 interface AutocompleteProps<T> {
   options: T[];
@@ -18,7 +18,7 @@ function Autocomplete<T>({
   onChange,
   label
 }: AutocompleteProps<T>) {
-  const [inputValue, setInputValue] = useState('');
+  const [inputValue, setInputValue] = useState("");
   const [isOpen, setIsOpen] = useState(false);
   const [filteredOptions, setFilteredOptions] = useState(options);
 
@@ -84,8 +84,8 @@ function Autocomplete<T>({
               onClick={() => handleOptionSelect(option)}
               width="100%"
               justifyContent="flex-start"
-              backgroundColor={index % 2 === 0 ? 'gray.100' : 'white'}
-              _hover={{ backgroundColor: 'gray.200' }}
+              backgroundColor={index % 2 === 0 ? "gray.100" : "white"}
+              _hover={{ backgroundColor: "gray.200" }}
             >
               {String(option[displayProperty])}
             </Button>

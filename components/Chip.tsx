@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { Input, Autocomplete, ComboBoxOption } from '@aws-amplify/ui-react';
+import React, { useState } from "react";
+import { Input, Autocomplete, ComboBoxOption } from "@aws-amplify/ui-react";
 
 interface ChipProps {
   value: string;
@@ -12,15 +12,15 @@ const Chip: React.FC<ChipProps> = ({ value, onChange, options, label }) => {
   const [chips, setChips] = useState<string[]>([]);
 
   const handleKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
-    if (event.key === 'Enter' && value.trim() !== '') {
+    if (event.key === "Enter" && value.trim() !== "") {
       setChips([...chips, value.trim()]);
-      onChange('');
+      onChange("");
     }
   };
 
   const handleOnSelect = (option: ComboBoxOption) => {
     setChips([...chips, option.label as string]);
-    onChange('');
+    onChange("");
   };
 
   const removeChip = (chipToRemove: string) => {
