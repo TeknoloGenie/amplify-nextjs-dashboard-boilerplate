@@ -17,17 +17,26 @@ describe("OrderedList", () => {
   });
 
   it("allows dragging and dropping items", () => {
-    render(<OrderedList value={mockData} />);
-    const items = screen.getAllByRole("article");
+    const onOrderChange = jest.fn();
+    render(<OrderedList value={mockData} onOrderChange={onOrderChange} />);
+    const dragHandles = screen.getAllByLabelText("Drag handle");
     
     // Simulate drag and drop
-    fireEvent.dragStart(items[0]);
-    fireEvent.dragOver(items[2]);
-    fireEvent.drop(items[2]);
+    fireEvent.dragStart(dragHandles[0]);
+    fireEvent.dragOver(dragHandles[2]);
+    fireEvent.drop(dragHandles[2]);
 
-    // Check if the order has changed
-    const updatedItems = screen.getAllByRole("article");
-    expect(updatedItems[2].textContent).toContain("Item 1");
-    expect(updatedItems[0].textContent).toContain("Item 2");
+    // Check if onOrderChange was called
+    expect(onOrderChange).toHaveBeenCalled();
+
+    // Get the first argument of the first call to onOrderChange
+    const newOrder = onOrderChange.mock.calls[0][0];
+
+    // Check if the new order is correct
+    expect(newOrder).toEqual([
+      { id: 2, name: "Item 2", order: 0 },
+      { id: 3, name: "Item 3", order: 1 },
+      { id: 1, name: "Item 1", order: 2 },
+    ]);
   });
 });

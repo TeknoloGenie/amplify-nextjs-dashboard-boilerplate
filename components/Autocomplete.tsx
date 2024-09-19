@@ -75,8 +75,6 @@ function Autocomplete<T>({
           borderColor="gray.300"
           borderRadius="md"
           maxHeight="200px"
-          overflowY="auto"
-          zIndex={1}
         >
           {filteredOptions.map((option, index) => (
             <Button
@@ -85,7 +83,6 @@ function Autocomplete<T>({
               width="100%"
               justifyContent="flex-start"
               backgroundColor={index % 2 === 0 ? "gray.100" : "white"}
-              _hover={{ backgroundColor: "gray.200" }}
             >
               {String(option[displayProperty])}
             </Button>

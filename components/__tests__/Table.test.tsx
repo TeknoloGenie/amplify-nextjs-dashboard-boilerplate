@@ -49,7 +49,9 @@ describe("SortableTable", () => {
 
   it("handles empty data", () => {
     render(<SortableTable data={[]} columns={columns} />);
-    expect(screen.queryByRole("row")).toBeNull();
+    expect(screen.getByRole("table")).toBeInTheDocument();
+    expect(screen.getAllByRole("row")).toHaveLength(1); // Only header row should be present
+    expect(screen.queryByRole("cell", { name: /Alice|Bob|Charlie/ })).toBeNull();
   });
 
   it("handles single row data", () => {
