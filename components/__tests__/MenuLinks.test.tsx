@@ -1,16 +1,18 @@
 import React from "react";
-import { render, fireEvent, waitFor } from "@testing-library/react";
+import { render, fireEvent, waitFor, act } from "@testing-library/react";
 import MenuLinks from "../MenuLinks";
 
+const mockPush = jest.fn().mockResolvedValue(true);
 jest.mock("next/router", () => ({
-  useRouter() {
-    return {
-      push: jest.fn(),
-    };
-  },
+  useRouter: () => ({
+    push: mockPush,
+  }),
 }));
 
 describe("MenuLinks", () => {
+  beforeEach(() => {
+    jest.clearAllMocks();
+  });
   const mockItems = [
     {
       path: "/home",
@@ -40,33 +42,32 @@ describe("MenuLinks", () => {
     const { getByText } = render(<MenuLinks items={mockItems} />);
     const homeLink = getByText("Home");
 
-    fireEvent.click(homeLink);
-
-    await waitFor(() => {
-      expect(mockItems[0].preloadData).toHaveBeenCalled();
+    await act(async () => {
+      fireEvent.click(homeLink);
     });
 
-    const { useRouter } = require("next/router");
-    const mockPush = useRouter().push;
-
-    expect(mockPush).toHaveBeenCalledWith({
-      pathname: "/home",
-      query: undefined,
+    expect(mockItems[0].preloadData).toHaveBeenCalled();
+    await waitFor(() => {
+      expect(mockPush).toHaveBeenCalledWith({
+        pathname: "/home",
+        query: undefined,
+      });
     });
   });
 
-  it("calls router.push with params when clicking a menu item with params", () => {
+  it("calls router.push with params when clicking a menu item with params", async () => {
     const { getByText } = render(<MenuLinks items={mockItems} />);
     const aboutLink = getByText("About");
 
-    fireEvent.click(aboutLink);
+    await act(async () => {
+      fireEvent.click(aboutLink);
+    });
 
-    const { useRouter } = require("next/router");
-    const mockPush = useRouter().push;
-
-    expect(mockPush).toHaveBeenCalledWith({
-      pathname: "/about",
-      query: { id: "123" },
+    await waitFor(() => {
+      expect(mockPush).toHaveBeenCalledWith({
+        pathname: "/about",
+        query: { id: "123" },
+      });
     });
   });
 });
