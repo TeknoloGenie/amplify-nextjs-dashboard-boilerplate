@@ -45,7 +45,7 @@ export default function App({ Component, pageProps }: AppProps) {
 						  { path: "/components/autocomplete", label: "Autocomplete" },
 						  { path: "/components/ordered-list", label: "OrderedList" },
 						  { path: "/components/popover", label: "Popover" },
-						  { path: "/components/color-election", label: "ColorSelection" },
+						  { path: "/components/color-selection", label: "ColorSelection" },
 						]}
 					  />
 					</Card>
