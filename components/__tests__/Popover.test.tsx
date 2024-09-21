@@ -10,18 +10,18 @@ describe('Popover', () => {
     jest.clearAllMocks();
   });
 
-  it('renders children when isOpen is true', () => {
+  it('renders children when visible is true', () => {
     render(
-      <Popover isOpen={true} onClose={mockOnClose} anchorEl={anchorEl}>
+      <Popover visible={true} onClose={mockOnClose} anchorEl={anchorEl}>
         <div>Popover content</div>
       </Popover>
     );
     expect(screen.getByText('Popover content')).toBeInTheDocument();
   });
 
-  it('does not render children when isOpen is false', () => {
+  it('does not render children when visible is false', () => {
     render(
-      <Popover isOpen={false} onClose={mockOnClose} anchorEl={anchorEl}>
+      <Popover visible={false} onClose={mockOnClose} anchorEl={anchorEl}>
         <div>Popover content</div>
       </Popover>
     );
@@ -30,7 +30,7 @@ describe('Popover', () => {
 
   it('calls onClose when clicking outside', () => {
     render(
-      <Popover isOpen={true} onClose={mockOnClose} anchorEl={anchorEl}>
+      <Popover visible={true} onClose={mockOnClose} anchorEl={anchorEl}>
         <div>Popover content</div>
       </Popover>
     );
@@ -40,7 +40,7 @@ describe('Popover', () => {
 
   it('does not call onClose when clicking inside', () => {
     render(
-      <Popover isOpen={true} onClose={mockOnClose} anchorEl={anchorEl}>
+      <Popover visible={true} onClose={mockOnClose} anchorEl={anchorEl}>
         <div>Popover content</div>
       </Popover>
     );

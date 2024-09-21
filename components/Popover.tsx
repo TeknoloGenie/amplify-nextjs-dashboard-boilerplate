@@ -2,13 +2,13 @@ import React, { useRef, useEffect, useState } from 'react';
 import { View } from '@aws-amplify/ui-react';
 
 interface PopoverProps {
-  isOpen: boolean;
+  visible: boolean;
   onClose: () => void;
   children: React.ReactNode;
   anchorEl: HTMLElement | null;
 }
 
-const Popover: React.FC<PopoverProps> = ({ isOpen, onClose, children, anchorEl }) => {
+const Popover: React.FC<PopoverProps> = ({ visible, onClose, children, anchorEl }) => {
   const popoverRef = useRef<HTMLDivElement>(null);
   const [position, setPosition] = useState({ top: 0, left: 0 });
 
@@ -19,14 +19,14 @@ const Popover: React.FC<PopoverProps> = ({ isOpen, onClose, children, anchorEl }
       }
     };
 
-    if (isOpen) {
+    if (visible) {
       document.addEventListener('mousedown', handleClickOutside);
     }
 
     return () => {
       document.removeEventListener('mousedown', handleClickOutside);
     };
-  }, [isOpen, onClose]);
+  }, [visible, onClose]);
 
   useEffect(() => {
     if (anchorEl && popoverRef.current) {
@@ -38,9 +38,9 @@ const Popover: React.FC<PopoverProps> = ({ isOpen, onClose, children, anchorEl }
         left: anchorRect.left + window.scrollX - (popoverRect.width - anchorRect.width) / 2,
       });
     }
-  }, [anchorEl, isOpen]);
+  }, [anchorEl, visible]);
 
-  if (!isOpen) return null;
+  if (!visible) return null;
 
   return (
     <View
