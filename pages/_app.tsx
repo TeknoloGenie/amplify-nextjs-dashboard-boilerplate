@@ -46,6 +46,7 @@ export default function App({ Component, pageProps }: AppProps) {
 						  { path: "/components/ordered-list", label: "OrderedList" },
 						  { path: "/components/popover", label: "Popover" },
 						  { path: "/components/color-selection", label: "ColorSelection" },
+						  { path: "/components/dynamic-input", label: "DynamicInput" },
 						]}
 					  />
 					</Card>

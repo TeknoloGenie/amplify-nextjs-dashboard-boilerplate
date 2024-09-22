@@ -1,0 +1,71 @@
+import React, { useState } from 'react';
+import { Flex, Heading, Text } from '@aws-amplify/ui-react';
+import DynamicInput from '../../../components/DynamicInput';
+
+const DynamicInputExample: React.FC = () => {
+  const [user, setUser] = useState({
+    name: 'John Doe',
+    email: 'john@example.com',
+    birthday: '1990-01-01',
+    settings: {
+      timezone: 'UTC',
+      notifications: {
+        email: true,
+        sms: false,
+      },
+    },
+  });
+
+  const handleChange = (newData: any) => {
+    setUser(newData);
+  };
+
+  return (
+    <Flex direction="column" gap="1rem">
+      <Heading level={2}>Dynamic Input Example</Heading>
+      
+      <DynamicInput
+        data={user}
+        path="name"
+        onChange={handleChange}
+        label="Name"
+      />
+      
+      <DynamicInput
+        data={user}
+        path="email"
+        onChange={handleChange}
+        label="Email"
+        type="text"
+      />
+      
+      <DynamicInput
+        data={user}
+        path="birthday"
+        onChange={handleChange}
+        label="Birthday"
+        type="date"
+      />
+      
+      <DynamicInput
+        data={user}
+        path="settings.timezone"
+        onChange={handleChange}
+        label="Timezone"
+      />
+      
+      <DynamicInput
+        data={user}
+        path="settings.notifications.email"
+        onChange={handleChange}
+        label="Email Notifications"
+        type="text"
+      />
+      
+      <Heading level={3}>Current User Data:</Heading>
+      <Text>{JSON.stringify(user, null, 2)}</Text>
+    </Flex>
+  );
+};
+
+export default DynamicInputExample;
