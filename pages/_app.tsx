@@ -47,6 +47,7 @@ export default function App({ Component, pageProps }: AppProps) {
 						  { path: "/components/popover", label: "Popover" },
 						  { path: "/components/color-selection", label: "ColorSelection" },
 						  { path: "/components/dynamic-input", label: "DynamicInput" },
+						  { path: "/components/dynamic-form", label: "DynamicForm" },
 						]}
 					  />
 					</Card>
