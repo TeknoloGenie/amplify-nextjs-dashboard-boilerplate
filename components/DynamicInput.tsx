@@ -12,7 +12,7 @@ interface DynamicInputProps {
 const DynamicInput: React.FC<DynamicInputProps> = ({ data, path, onChange, label, type = "text" }) => {
   const getValue = (obj: any, path: string): any => {
     try {
-      return path.split('.').reduce((acc, part) => acc && acc[part], obj);
+      return path.split(".").reduce((acc, part) => acc && acc[part], obj);
     } catch (error) {
       console.error(`Error getting value for path: ${path}`, error);
       return undefined;
@@ -20,21 +20,21 @@ const DynamicInput: React.FC<DynamicInputProps> = ({ data, path, onChange, label
   };
 
   const setValue = (obj: any, path: string, value: any): any => {
-    const [head, ...rest] = path.split('.');
+    const [head, ...rest] = path.split(".");
     return {
       ...obj,
       [head]: rest.length
-        ? setValue(obj[head] || {}, rest.join('.'), value)
+        ? setValue(obj[head] || {}, rest.join("."), value)
         : value
     };
   };
 
-  const [inputValue, setInputValue] = useState(getValue(data, path) || '');
+  const [inputValue, setInputValue] = useState(getValue(data, path) || "");
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
     const value = getValue(data, path);
-    setInputValue(value !== undefined ? value : '');
+    setInputValue(value !== undefined ? value : "");
     setError(value === undefined ? `Invalid path: ${path}` : null);
   }, [data, path]);
 

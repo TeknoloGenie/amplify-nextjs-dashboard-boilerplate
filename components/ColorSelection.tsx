@@ -1,20 +1,20 @@
-import React, { useState, useRef } from 'react';
-import { View } from '@aws-amplify/ui-react';
-import Popover from './Popover';
+import React, { useState, useRef } from "react";
+import { View } from "@aws-amplify/ui-react";
+import Popover from "./Popover";
 
 interface ColorSelectionProps {
   value: string;
   onChange: (value: string) => void;
   className?: string;
-  output?: 'rgb' | 'hex';
+  output?: "rgb" | "hex";
 }
 
-const ColorSelection: React.FC<ColorSelectionProps> = ({ value, onChange, output = 'hex', className }) => {
+const ColorSelection: React.FC<ColorSelectionProps> = ({ value, onChange, output = "hex", className }) => {
   const [isOpen, setIsOpen] = useState(false);
   const triggerRef = useRef<HTMLDivElement>(null);
 
   const handleColorChange = (color: string) => {
-    const formattedColor = output === 'rgb' ? hexToRgb(color) : color;
+    const formattedColor = output === "rgb" ? hexToRgb(color) : color;
     onChange(formattedColor);
     setIsOpen(false);
   };

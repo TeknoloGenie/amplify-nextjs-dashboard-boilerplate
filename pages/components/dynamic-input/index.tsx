@@ -1,14 +1,14 @@
-import React, { useState } from 'react';
-import { Flex, Heading, Text } from '@aws-amplify/ui-react';
-import DynamicInput from '../../../components/DynamicInput';
+import React, { useState } from "react";
+import { Flex, Heading, Text } from "@aws-amplify/ui-react";
+import DynamicInput from "../../../components/DynamicInput";
 
 const DynamicInputExample: React.FC = () => {
   const [user, setUser] = useState({
-    name: 'John Doe',
-    email: 'john@example.com',
-    birthday: '1990-01-01',
+    name: "John Doe",
+    email: "john@example.com",
+    birthday: "1990-01-01",
     settings: {
-      timezone: 'UTC',
+      timezone: "UTC",
       notifications: {
         email: true,
         sms: false,

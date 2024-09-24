@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
-import { Flex, Heading, Text, Button } from '@aws-amplify/ui-react';
-import DynamicForm from '../../../components/DynamicForm';
+import React, { useState } from "react";
+import { Flex, Heading, Text, Button } from "@aws-amplify/ui-react";
+import DynamicForm from "../../../components/DynamicForm";
 
 // Mock model for demonstration purposes
 const MockModel = {
@@ -9,37 +9,37 @@ const MockModel = {
 
 const DynamicFormExample: React.FC = () => {
   const [data, setData] = useState({
-    name: 'John Doe',
+    name: "John Doe",
     age: 30,
-    email: 'john@example.com',
-    birthdate: '1990-01-01',
+    email: "john@example.com",
+    birthdate: "1990-01-01",
     isStudent: true,
     address: {
-      street: '123 Main St',
-      city: 'Anytown',
-      country: 'USA',
+      street: "123 Main St",
+      city: "Anytown",
+      country: "USA",
     },
   });
 
   const options = {
-    age: { type: 'number' },
-    birthdate: { type: 'date', label: 'Date of Birth' },
-    isStudent: { type: 'boolean', label: 'Student Status' },
+    age: { type: "number" },
+    birthdate: { type: "date", label: "Date of Birth" },
+    isStudent: { type: "boolean", label: "Student Status" },
   };
 
   const resource = {
     fields: {
-      name: { type: 'text' },
-      age: { type: 'number' },
-      email: { type: 'text' },
-      birthdate: { type: 'date' },
-      isStudent: { type: 'boolean' },
+      name: { type: "text" },
+      age: { type: "number" },
+      email: { type: "text" },
+      birthdate: { type: "date" },
+      isStudent: { type: "boolean" },
       address: {
-        type: 'object',
+        type: "object",
         fields: {
-          street: { type: 'text' },
-          city: { type: 'text' },
-          country: { type: 'text' },
+          street: { type: "text" },
+          city: { type: "text" },
+          country: { type: "text" },
         },
       },
     },

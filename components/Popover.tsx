@@ -1,5 +1,5 @@
-import React, { useRef, useEffect, useState } from 'react';
-import { View } from '@aws-amplify/ui-react';
+import React, { useRef, useEffect, useState } from "react";
+import { View } from "@aws-amplify/ui-react";
 
 interface PopoverProps {
   visible: boolean;
@@ -20,11 +20,11 @@ const Popover: React.FC<PopoverProps> = ({ visible, onClose, children, anchorEl 
     };
 
     if (visible) {
-      document.addEventListener('mousedown', handleClickOutside);
+      document.addEventListener("mousedown", handleClickOutside);
     }
 
     return () => {
-      document.removeEventListener('mousedown', handleClickOutside);
+      document.removeEventListener("mousedown", handleClickOutside);
     };
   }, [visible, onClose]);
 

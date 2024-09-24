@@ -1,8 +1,8 @@
-import React, { useState } from 'react';
-import Chip from '@/components/Chip';
+import React, { useState } from "react";
+import Chip from "@/components/Chip";
 
 const ChipExample: React.FC = () => {
-  const [value, setValue] = useState('');
+  const [value, setValue] = useState("");
   const options = [{"id": "apple", "label": "apple"}, {"id": "banana", "label": "banana"}, {"id": "cherry", "label": "cherry"}];
 
   return (

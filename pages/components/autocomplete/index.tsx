@@ -1,11 +1,11 @@
-import React, { useState } from 'react';
-import Autocomplete from '@/components/Autocomplete';
+import React, { useState } from "react";
+import Autocomplete from "@/components/Autocomplete";
 
 const options = [
-  { id: '1', name: 'Option 1' },
-  { id: '2', name: 'Option 2' },
-  { id: '3', name: 'Option 3' },
-  { id: '4', name: 'Option 4' },
+  { id: "1", name: "Option 1" },
+  { id: "2", name: "Option 2" },
+  { id: "3", name: "Option 3" },
+  { id: "4", name: "Option 4" },
 ];
 
 const AutocompleteExample = () => {
@@ -28,7 +28,7 @@ const AutocompleteExample = () => {
       />
       <div>
         <h2>Selected Value:</h2>
-        <p>{selectedValue ? JSON.stringify(selectedValue) : 'None'}</p>
+        <p>{selectedValue ? JSON.stringify(selectedValue) : "None"}</p>
       </div>
     </div>
   );

@@ -1,34 +1,34 @@
-import React from 'react';
-import { render, fireEvent, screen } from '@testing-library/react';
-import Popover from '../Popover';
+import React from "react";
+import { render, fireEvent, screen } from "@testing-library/react";
+import Popover from "../Popover";
 
-describe('Popover', () => {
+describe("Popover", () => {
   const mockOnClose = jest.fn();
-  const anchorEl = document.createElement('div');
+  const anchorEl = document.createElement("div");
 
   beforeEach(() => {
     jest.clearAllMocks();
   });
 
-  it('renders children when visible is true', () => {
+  it("renders children when visible is true", () => {
     render(
       <Popover visible={true} onClose={mockOnClose} anchorEl={anchorEl}>
         <div>Popover content</div>
       </Popover>
     );
-    expect(screen.getByText('Popover content')).toBeInTheDocument();
+    expect(screen.getByText("Popover content")).toBeInTheDocument();
   });
 
-  it('does not render children when visible is false', () => {
+  it("does not render children when visible is false", () => {
     render(
       <Popover visible={false} onClose={mockOnClose} anchorEl={anchorEl}>
         <div>Popover content</div>
       </Popover>
     );
-    expect(screen.queryByText('Popover content')).not.toBeInTheDocument();
+    expect(screen.queryByText("Popover content")).not.toBeInTheDocument();
   });
 
-  it('calls onClose when clicking outside', () => {
+  it("calls onClose when clicking outside", () => {
     render(
       <Popover visible={true} onClose={mockOnClose} anchorEl={anchorEl}>
         <div>Popover content</div>
@@ -38,13 +38,13 @@ describe('Popover', () => {
     expect(mockOnClose).toHaveBeenCalled();
   });
 
-  it('does not call onClose when clicking inside', () => {
+  it("does not call onClose when clicking inside", () => {
     render(
       <Popover visible={true} onClose={mockOnClose} anchorEl={anchorEl}>
         <div>Popover content</div>
       </Popover>
     );
-    fireEvent.mouseDown(screen.getByText('Popover content'));
+    fireEvent.mouseDown(screen.getByText("Popover content"));
     expect(mockOnClose).not.toHaveBeenCalled();
   });
 });

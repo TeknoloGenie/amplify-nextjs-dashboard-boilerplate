@@ -1,8 +1,8 @@
 import { useState, useEffect } from "react";
 import { generateClient } from "aws-amplify/data";
 import type { Schema } from "@/amplify/data/resource";
-import { Authenticator, Card, Grid, Button } from '@aws-amplify/ui-react'
-import '@aws-amplify/ui-react/styles.css'
+import { Authenticator, Card, Grid, Button } from "@aws-amplify/ui-react"
+import "@aws-amplify/ui-react/styles.css"
 
 const client = generateClient<Schema>();
 

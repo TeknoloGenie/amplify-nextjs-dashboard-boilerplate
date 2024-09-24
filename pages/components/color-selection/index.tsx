@@ -1,10 +1,10 @@
-import React, { useState } from 'react';
-import { View, Text } from '@aws-amplify/ui-react';
-import ColorSelection from '../../../components/ColorSelection';
+import React, { useState } from "react";
+import { View, Text } from "@aws-amplify/ui-react";
+import ColorSelection from "../../../components/ColorSelection";
 
 const ColorSelectionExample: React.FC = () => {
-  const [color, setColor] = useState('#ff0000');
-  const [outputFormat, setOutputFormat] = useState<'hex' | 'rgb'>('hex');
+  const [color, setColor] = useState("#ff0000");
+  const [outputFormat, setOutputFormat] = useState<"hex" | "rgb">("hex");
 
   return (
     <View padding="1rem">
@@ -20,7 +20,7 @@ const ColorSelectionExample: React.FC = () => {
         <Text>Output Format:</Text>
         <select
           value={outputFormat}
-          onChange={(e) => setOutputFormat(e.target.value as 'hex' | 'rgb')}
+          onChange={(e) => setOutputFormat(e.target.value as "hex" | "rgb")}
         >
           <option value="hex">HEX</option>
           <option value="rgb">RGB</option>
