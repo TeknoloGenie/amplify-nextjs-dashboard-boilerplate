@@ -3,12 +3,14 @@ import { Flex, Button } from "@aws-amplify/ui-react";
 import { DataStore } from "@aws-amplify/datastore";
 import DynamicInput from "./DynamicInput";
 
+type FormFieldType = "text" | "number" | "date" | "boolean" | "object" | "list";
+
 interface DynamicFormProps {
   data: any;
   onChange: (newData: any) => void;
   options?: {
     [key: string]: {
-      type?: "text" | "number" | "date";
+      type?: FormFieldType;
       label?: string;
     };
   };
@@ -64,7 +66,7 @@ const DynamicForm: React.FC<DynamicFormProps> = ({ data, onChange, options = {},
       } else {
         const original = await DataStore.query(model, data.id);
         if (original) {
-          await DataStore.save(model.copyOf(original, (updated) => {
+          await DataStore.save(model.copyOf(original, (updated: any) => {
             Object.assign(updated, data);
           }));
         }

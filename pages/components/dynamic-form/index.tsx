@@ -22,7 +22,7 @@ const DynamicFormExample: React.FC = () => {
   });
 
   const options = {
-    age: { type: "number" },
+    age: { type: "number", label: "Age" },
     birthdate: { type: "date", label: "Date of Birth" },
     isStudent: { type: "boolean", label: "Student Status" },
   };
