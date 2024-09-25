@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Flex, Heading, Text } from "@aws-amplify/ui-react";
-import DynamicInput from "../../../components/DynamicInput";
+import DynamicInput, { FormFieldType } from "@/components/DynamicInput";
 
 const DynamicInputExample: React.FC = () => {
   const [user, setUser] = useState({
@@ -36,7 +36,7 @@ const DynamicInputExample: React.FC = () => {
         path="email"
         onChange={handleChange}
         label="Email"
-        type="text"
+        type={FormFieldType.Text}
       />
       
       <DynamicInput
@@ -44,7 +44,7 @@ const DynamicInputExample: React.FC = () => {
         path="birthday"
         onChange={handleChange}
         label="Birthday"
-        type="date"
+        type={FormFieldType.Date}
       />
       
       <DynamicInput
@@ -59,7 +59,7 @@ const DynamicInputExample: React.FC = () => {
         path="settings.notifications.email"
         onChange={handleChange}
         label="Email Notifications"
-        type="text"
+        type={FormFieldType.Boolean}
       />
       
       <Heading level={3}>Current User Data:</Heading>

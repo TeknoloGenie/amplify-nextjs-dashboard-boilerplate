@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Flex, Heading, Text, Button } from "@aws-amplify/ui-react";
-import DynamicForm from "../../../components/DynamicForm";
+import DynamicForm from "@/components/DynamicForm";
+import { FormFieldType } from "@/components/DynamicInput";
 
 // Mock model for demonstration purposes
 const MockModel = {
@@ -22,24 +23,24 @@ const DynamicFormExample: React.FC = () => {
   });
 
   const options = {
-    age: { type: "number", label: "Age" },
-    birthdate: { type: "date", label: "Date of Birth" },
-    isStudent: { type: "boolean", label: "Student Status" },
+    age: { type: FormFieldType.Number, label: "Age" },
+    birthdate: { type: FormFieldType.Date, label: "Date of Birth" },
+    isStudent: { type: FormFieldType.Boolean, label: "Student Status" },
   };
 
   const resource = {
     fields: {
-      name: { type: "text" },
-      age: { type: "number" },
-      email: { type: "text" },
-      birthdate: { type: "date" },
-      isStudent: { type: "boolean" },
+      name: { type: FormFieldType.Text },
+      age: { type: FormFieldType.Number },
+      email: { type: FormFieldType.Text },
+      birthdate: { type: FormFieldType.Date },
+      isStudent: { type: FormFieldType.Boolean },
       address: {
-        type: "object",
+        type: FormFieldType.Object,
         fields: {
-          street: { type: "text" },
-          city: { type: "text" },
-          country: { type: "text" },
+          street: { type: FormFieldType.Text },
+          city: { type: FormFieldType.Text },
+          country: { type: FormFieldType.Text },
         },
       },
     },

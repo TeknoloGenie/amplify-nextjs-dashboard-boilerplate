@@ -1,12 +1,21 @@
 import React, { useState, useEffect } from "react";
 import { Input, Text, Flex } from "@aws-amplify/ui-react";
 
+export enum FormFieldType {
+  Text = "text",
+  Number = "number",
+  Date = "date",
+  Boolean = "boolean",
+  Object = "object",
+  List = "list"
+}
+
 interface DynamicInputProps {
   data: any;
   path: string;
   onChange: (newData: any) => void;
   label?: string;
-  type?: "text" | "number" | "date";
+  type?: FormFieldType;
 }
 
 const DynamicInput: React.FC<DynamicInputProps> = ({ data, path, onChange, label, type = "text" }) => {

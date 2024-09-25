@@ -3,18 +3,31 @@ import { Flex, Button } from "@aws-amplify/ui-react";
 import { DataStore } from "@aws-amplify/datastore";
 import DynamicInput from "./DynamicInput";
 
-type FormFieldType = "text" | "number" | "date" | "boolean" | "object" | "list";
+export enum FormFieldType {
+  Text = "text",
+  Number = "number",
+  Date = "date",
+  Boolean = "boolean",
+  Object = "object",
+  List = "list"
+}
 
 interface DynamicFormProps {
   data: any;
   onChange: (newData: any) => void;
   options?: {
     [key: string]: {
-      type?: FormFieldType;
+      type: FormFieldType;
       label?: string;
     };
   };
-  resource?: any;
+  resource?: {
+    fields: {
+      [key: string]: {
+        type: FormFieldType;
+      };
+    };
+  };
   model?: any;
 }
 
@@ -29,7 +42,7 @@ const DynamicForm: React.FC<DynamicFormProps> = ({ data, onChange, options = {},
     return Object.entries(obj).flatMap(([key, value]) => {
       const fullPath = parentKey ? `${parentKey}.${key}` : key;
       const fieldOptions = options[fullPath] || {};
-      const fieldType = fieldOptions.type || (resource && resource.fields[fullPath]?.type) || "text";
+      const fieldType = fieldOptions.type || (resource && resource.fields[fullPath]?.type) || FormFieldType.Text;
       const fieldLabel = fieldOptions.label || key;
 
       if (typeof value === "object" && value !== null && !Array.isArray(value)) {
