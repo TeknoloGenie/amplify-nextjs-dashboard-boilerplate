@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Input, Text, Flex } from "@aws-amplify/ui-react";
+import { Input, Text, Flex, SwitchField } from "@aws-amplify/ui-react";
 
 export enum FormFieldType {
   Text = "text",
@@ -21,7 +21,26 @@ interface DynamicInputProps {
 const DynamicInput: React.FC<DynamicInputProps> = ({ data, path, onChange, label, type = "text" }) => {
   const getValue = (obj: any, path: string): any => {
     try {
-      return path.split(".").reduce((acc, part) => acc && acc[part], obj);
+      const value = path.split(".").reduce((acc, part) => acc && acc[part], obj);
+      
+      // Handle different types based on the FormFieldType
+      if (type === FormFieldType.Number) {
+        const numberValue = parseFloat(value);
+        return isNaN(numberValue) ? null : numberValue;
+      } else if (type === FormFieldType.Boolean) {
+        if (typeof value === "boolean") {
+          return value;
+        }
+        return value === "true" ? true : false;
+      } else if (type === FormFieldType.Date) {
+        const dateValue = new Date(value);
+        return isNaN(dateValue.getTime()) ? null : dateValue;
+      } else if (type === FormFieldType.Text) {
+        return value;
+      }
+      
+      // Default case
+      return value;
     } catch (error) {
       console.error(`Error getting value for path: ${path}`, error);
       return undefined;
@@ -48,7 +67,27 @@ const DynamicInput: React.FC<DynamicInputProps> = ({ data, path, onChange, label
   }, [data, path]);
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const newValue = event.target.value;
+    let newValue;
+    if (type === FormFieldType.Number) {
+      const numberValue = parseFloat(event.target.value);
+      if (isNaN(numberValue)) {
+        setError("Invalid number value");
+        return;
+      }
+      newValue = numberValue;
+    } else if (type === FormFieldType.Boolean) {
+      newValue = event.target.checked;
+    } else if (type === FormFieldType.Date) {
+      const dateValue = new Date(event.target.value);
+      if (isNaN(dateValue.getTime())) {
+        setError("Invalid date value");
+        return;
+      }
+      newValue = dateValue;
+    } else {
+      newValue = event.target.value;
+    }
+  
     setInputValue(newValue);
     try {
       const updatedData = setValue(data, path, newValue);
@@ -62,15 +101,22 @@ const DynamicInput: React.FC<DynamicInputProps> = ({ data, path, onChange, label
 
   return (
     <Flex direction="column">
-      {label && <Text>{label}</Text>}
-      <Input
-        value={inputValue}
-        onChange={handleChange}
-        placeholder={path}
-        type={type}
-        hasError={!!error}
-      />
-      {error && <Text color="red">{error}</Text>}
+      {type === FormFieldType.Boolean ? (
+        <SwitchField label={label} isChecked={inputValue} onChange={handleChange} />
+      ) : null}
+      {(type === FormFieldType.Text || type === FormFieldType.Number) ? (
+        <>
+          {label && <Text>{label}</Text>}
+          <Input
+            value={inputValue}
+            onChange={handleChange}
+            placeholder={path}
+            type={type}
+            hasError={!!error}
+          />
+          {error && <Text color="red">{error}</Text>}
+        </>
+      ) : null}
     </Flex>
   );
 };
