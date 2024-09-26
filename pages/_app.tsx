@@ -48,6 +48,7 @@ export default function App({ Component, pageProps }: AppProps) {
 						  { path: "/components/color-selection", label: "ColorSelection" },
 						  { path: "/components/dynamic-input", label: "DynamicInput" },
 						  { path: "/components/dynamic-form", label: "DynamicForm" },
+						  { path: "/components/dynamic-component", label: "DynamicComponent" },
 						]}
 					  />
 					</Card>
