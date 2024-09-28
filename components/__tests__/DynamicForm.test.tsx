@@ -91,7 +91,6 @@ describe("DynamicForm", () => {
   test("handles new record creation", async () => {
     const mockOnChange = jest.fn();
     const newData = { ...mockData };
-    delete newData.id;
 
     render(<DynamicForm data={newData} onChange={mockOnChange} model={mockModel} />);
 
@@ -114,6 +113,8 @@ describe("DynamicForm", () => {
 
     await waitFor(() => {
       expect(DataStore.save).toHaveBeenCalledWith(expect.any(mockModel));
+    });
+    await waitFor(() => {
       expect(mockModel.copyOf).toHaveBeenCalled();
     });
   });

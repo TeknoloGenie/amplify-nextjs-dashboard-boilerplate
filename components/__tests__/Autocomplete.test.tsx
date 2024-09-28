@@ -44,7 +44,11 @@ describe("Autocomplete", () => {
 
     await waitFor(() => {
       expect(screen.getByText("Option 1")).toBeInTheDocument();
+    });
+    await waitFor(() => {
       expect(screen.queryByText("Option 2")).not.toBeInTheDocument();
+    });
+    await waitFor(() => {
       expect(screen.queryByText("Option 3")).not.toBeInTheDocument();
     });
   });
@@ -64,11 +68,7 @@ describe("Autocomplete", () => {
 
     const input = screen.getByPlaceholderText("Type to search...");
     fireEvent.focus(input);
-
-    await waitFor(() => {
-      fireEvent.click(screen.getByText("Option 1"));
-    });
-
+    fireEvent.click(screen.getByText("Option 1"));
     expect(mockOnChange).toHaveBeenCalledWith(mockOptions[0]);
   });
 

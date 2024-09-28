@@ -1,5 +1,5 @@
 import React from "react";
-import { render, fireEvent, waitFor, act } from "@testing-library/react";
+import { render, fireEvent, waitFor, act, screen } from "@testing-library/react";
 import MenuLinks from "../MenuLinks";
 
 const mockPush = jest.fn().mockResolvedValue(true);
@@ -31,21 +31,16 @@ describe("MenuLinks", () => {
   ];
 
   it("renders all menu items", () => {
-    const { getByText } = render(<MenuLinks items={mockItems} />);
-    
-    expect(getByText("Home")).toBeInTheDocument();
-    expect(getByText("About")).toBeInTheDocument();
-    expect(getByText("Contact")).toBeInTheDocument();
+    render(<MenuLinks items={mockItems} />);
+    expect(screen.getByText("Home")).toBeInTheDocument();
+    expect(screen.getByText("About")).toBeInTheDocument();
+    expect(screen.getByText("Contact")).toBeInTheDocument();
   });
 
   it("calls preloadData and router.push when clicking a menu item", async () => {
-    const { getByText } = render(<MenuLinks items={mockItems} />);
-    const homeLink = getByText("Home");
-
-    await act(async () => {
-      fireEvent.click(homeLink);
-    });
-
+    render(<MenuLinks items={mockItems} />);
+    const homeLink = screen.getByText("Home");
+    fireEvent.click(homeLink);
     expect(mockItems[0].preloadData).toHaveBeenCalled();
     await waitFor(() => {
       expect(mockPush).toHaveBeenCalledWith({
@@ -56,13 +51,9 @@ describe("MenuLinks", () => {
   });
 
   it("calls router.push with params when clicking a menu item with params", async () => {
-    const { getByText } = render(<MenuLinks items={mockItems} />);
-    const aboutLink = getByText("About");
-
-    await act(async () => {
-      fireEvent.click(aboutLink);
-    });
-
+    render(<MenuLinks items={mockItems} />);
+    const aboutLink = screen.getByText("About");
+    fireEvent.click(aboutLink);
     await waitFor(() => {
       expect(mockPush).toHaveBeenCalledWith({
         pathname: "/about",
