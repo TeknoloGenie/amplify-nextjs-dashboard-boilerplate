@@ -12,9 +12,10 @@ interface MenuItem {
 
 interface MenuLinksProps {
   items: MenuItem[];
+  label?: string;
 }
 
-const MenuLinks: React.FC<MenuLinksProps> = ({ items }) => {
+const MenuLinks: React.FC<MenuLinksProps> = ({ items, label }) => {
   const router = useRouter();
 
   const handleClick = React.useCallback(async (item: MenuItem) => {
@@ -28,22 +29,25 @@ const MenuLinks: React.FC<MenuLinksProps> = ({ items }) => {
   }, [router]);
 
   return (
-    <nav className="grid grid-cols-1">
-      {items.map((item, index) => (
-        <React.Fragment key={item.path}>
-          <Link
-            className="min-w-full m-2"
-            onClick={() => handleClick(item)}
-          >
-            {item.icon && <i className={`m-2 ${item.icon}`} />}
-            {item.label}
-          </Link>
-          {index < items.length - 1 && (
-            <Divider className="divide-red-500" size="small" orientation="horizontal" />
-          )}
-        </React.Fragment>
-      ))}
-    </nav>
+    <div className="mb-2">
+      {label ? <span className="text-lg">{label}</span>: null}
+      <nav className="grid grid-cols-1">
+        {items.map((item, index) => (
+          <React.Fragment key={item.path}>
+            <Link
+              className="min-w-full m-2"
+              onClick={() => handleClick(item)}
+            >
+              {item.icon && <i className={`m-2 ${item.icon}`} />}
+              {item.label}
+            </Link>
+            {index < items.length - 1 && (
+              <Divider className="divide-red-500" size="small" orientation="horizontal" />
+            )}
+          </React.Fragment>
+        ))}
+      </nav>
+    </div>
   );
 };
 

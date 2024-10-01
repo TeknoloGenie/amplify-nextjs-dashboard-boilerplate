@@ -37,6 +37,11 @@ describe("MenuLinks", () => {
     expect(screen.getByText("Contact")).toBeInTheDocument();
   });
 
+  it("renders an optional label at the top of the entire MenuLinks", () => {
+    render(<MenuLinks items={mockItems} label="Main Menu" />);
+    expect(screen.getByText("Main Menu")).toBeInTheDocument();
+  });
+
   it("calls preloadData and router.push when clicking a menu item", async () => {
     render(<MenuLinks items={mockItems} />);
     const homeLink = screen.getByText("Home");
