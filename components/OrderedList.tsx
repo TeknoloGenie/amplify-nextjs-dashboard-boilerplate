@@ -23,38 +23,52 @@ const OrderedList: React.FC<OrderedListProps> = ({ value, onOrderChange }) => {
     setDraggedIndex(index);
   };
 
-  const handleDragEnd = () => {
-    setDragging(false);
-    setDraggedIndex(null);
-    dragNode.current?.removeEventListener("dragend", handleDragEnd);
-    dragItem.current = null;
-    dragNode.current = null;
+  const handleDragOver = (e: React.DragEvent<HTMLDivElement>) => {
+    e.preventDefault();
   };
 
-  const handleDragOver = (e: React.DragEvent | React.TouchEvent) => {
-    e.preventDefault();
-    const currentItem = dragItem.current;
-    if (currentItem !== null) {
-      const targetIndex = (e.target as HTMLElement).closest("[data-index]")?.getAttribute("data-index");
-      if (targetIndex && currentItem !== parseInt(targetIndex)) {
-        handleDrop(parseInt(targetIndex));
-      }
+  const getTargetIndex = (e: React.DragEvent<HTMLDivElement>) => {
+    const targetElement = e.target as HTMLElement;
+    const cardElement = targetElement.closest("[data-index]");
+    if (cardElement) {
+      return parseInt(cardElement.getAttribute("data-index") || "-1", 10);
     }
+    return -1;
   };
 
   const handleDrop = (targetIndex: number) => {
     const currentItem = dragItem.current;
-    if (currentItem !== null) {
+    if (currentItem !== null && currentItem !== targetIndex) {
       const newItems = [...items];
       const [reorderedItem] = newItems.splice(currentItem, 1);
       newItems.splice(targetIndex, 0, reorderedItem);
       const updatedItems = newItems.map((item, index) => ({ ...item, order: index }));
       setItems(updatedItems);
       if (onOrderChange) {
-        onOrderChange(updatedItems);
+        const orderedItems = updatedItems.map(({order }) => ({ order }));
+        onOrderChange(orderedItems);
       }
+      dragItem.current = targetIndex;
     }
-    handleDragEnd();
+  };
+
+  const handleDragEnter = (e: React.DragEvent<HTMLDivElement>) => {
+    const targetIndex = getTargetIndex(e);
+    if (targetIndex !== -1 && dragItem.current !== null && dragItem.current !== targetIndex) {
+      handleDrop(targetIndex);
+    }
+  };
+
+  const handleDragEnd = (e: DragEvent) => {
+    const finalTargetIndex = getTargetIndex(e as unknown as React.DragEvent<HTMLDivElement>);
+    if (finalTargetIndex !== -1 && dragItem.current !== null && dragItem.current !== finalTargetIndex) {
+      handleDrop(finalTargetIndex);
+    }
+    setDragging(false);
+    setDraggedIndex(null);
+    dragNode.current?.removeEventListener("dragend", handleDragEnd);
+    dragItem.current = null;
+    dragNode.current = null;
   };
 
   return (
@@ -83,8 +97,8 @@ const OrderedList: React.FC<OrderedListProps> = ({ value, onOrderChange }) => {
               draggable
               onDragStart={(e) => handleDragStart(e, index)}
               onDragOver={handleDragOver}
+              onDragEnter={handleDragEnter}
               onTouchStart={(e) => handleDragStart(e, index)}
-              onTouchMove={handleDragOver}
               aria-label="Drag handle"
             >
               <Icon
