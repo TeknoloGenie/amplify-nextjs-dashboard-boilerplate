@@ -36,6 +36,7 @@ export default function App({ Component, pageProps }: AppProps) {
 				  <View rowSpan={2}>
 					<Card>
 					  <MenuLinks
+					  	label="Components"
 						items={[
 						  { path: "/components/modal", label: "Modal" },
 						  { path: "/components/menu-links", label: "MenuLinks" },
@@ -49,6 +50,13 @@ export default function App({ Component, pageProps }: AppProps) {
 						  { path: "/components/dynamic-input", label: "DynamicInput" },
 						  { path: "/components/dynamic-form", label: "DynamicForm" },
 						  { path: "/components/dynamic-component", label: "DynamicComponent" },
+						]}
+					  />
+					  <MenuLinks
+					  	label="Dashboards"
+						items={[
+						  { path: "/dashboard", label: "Custom" },
+						  { path: "/dashboard/2", label: "Support" },
 						]}
 					  />
 					</Card>
