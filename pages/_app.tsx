@@ -50,6 +50,7 @@ export default function App({ Component, pageProps }: AppProps) {
 						  { path: "/components/dynamic-input", label: "DynamicInput" },
 						  { path: "/components/dynamic-form", label: "DynamicForm" },
 						  { path: "/components/dynamic-component", label: "DynamicComponent" },
+						  { path: "/components/panel", label: "Panel" },
 						]}
 					  />
 					  <MenuLinks
