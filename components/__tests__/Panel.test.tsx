@@ -1,3 +1,4 @@
+/* eslint-disable testing-library/no-node-access */
 import React from "react";
 import { render, screen } from "@testing-library/react";
 import Panel from "../Panel";
@@ -44,6 +45,7 @@ describe("Panel", () => {
       </Panel>
     );
 
+    // eslint-disable-next-line testing-library/no-node-access
     const panelElement = screen.getByRole("heading", { level: 2 }).parentElement;
     expect(panelElement).toHaveAttribute("id", "test-panel");
   });
