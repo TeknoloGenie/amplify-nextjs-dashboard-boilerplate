@@ -41,6 +41,7 @@ export default function App({ Component, pageProps }: AppProps) {
 						  { path: "/components/modal", label: "Modal" },
 						  { path: "/components/menu-links", label: "MenuLinks" },
 						  { path: "/components/table", label: "Table" },
+						  { path: "/components/data-table", label: "DataTable" },
 						  { path: "/components/multi-select-field", label: "MultiSelectField" },
 						  { path: "/components/chip", label: "Chip" },
 						  { path: "/components/autocomplete", label: "Autocomplete" },

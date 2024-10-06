@@ -45,13 +45,27 @@ const DynamicForm: React.FC<DynamicFormProps> = ({ data, onChange, options = {},
       const fieldType = fieldOptions.type || (resource && resource.fields[fullPath]?.type) || FormFieldType.Text;
       const fieldLabel = fieldOptions.label || key;
 
-      if (typeof value === "object" && value !== null && !Array.isArray(value)) {
-        return [
-          <Flex key={fullPath} direction="column" gap="0.5rem">
-            <strong>{fieldLabel}</strong>
-            {renderFormFields(value, fullPath)}
-          </Flex>
-        ];
+      if (typeof value === "object" && value !== null) {
+        if (Array.isArray(value)) {
+          return [
+            <Flex key={fullPath} direction="column" gap="0.5rem">
+              <strong>{fieldLabel}</strong>
+              {value.map((item, index) => (
+                <Flex key={`${fullPath}.${index}`} direction="column" gap="0.5rem">
+                  <strong>{`${fieldLabel} ${index + 1}`}</strong>
+                  {renderFormFields(item, `${fullPath}.${index}`)}
+                </Flex>
+              ))}
+            </Flex>
+          ];
+        } else {
+          return [
+            <Flex key={fullPath} direction="column" gap="0.5rem">
+              <strong>{fieldLabel}</strong>
+              {renderFormFields(value, fullPath)}
+            </Flex>
+          ];
+        }
       }
 
       return [

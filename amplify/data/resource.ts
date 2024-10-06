@@ -13,7 +13,7 @@ const schema = a.schema({
       content: a.string(),
       createdAt: a.datetime().default(new Date().toISOString())
     })
-    .authorization((allow) => [allow.publicApiKey()]),
+    .authorization((allow: { publicApiKey: () => any; }) => [allow.publicApiKey()]),
   Message: a
     .model({
       message: a.string(),
@@ -21,8 +21,8 @@ const schema = a.schema({
       conversationId: a.id().required(),
       createdAt: a.datetime().default(new Date().toISOString())
     })
-    .authorization((allow) => [
-      allow.ownerDefinedIn('conversationId'),
+    .authorization((allow: { ownerDefinedIn: (arg0: string) => any; authenticated: () => any; }) => [
+      allow.ownerDefinedIn("conversationId"),
       allow.authenticated()
     ]),
   UserConversations: a
@@ -33,14 +33,14 @@ const schema = a.schema({
       conversation: a.belongsTo("Conversation", "conversationId"),
       createdAt: a.datetime().default(new Date().toISOString())
     })
-    .authorization((allow) => [allow.owner()]),
+    .authorization((allow: { owner: () => any; }) => [allow.owner()]),
   User: a
     .model({
       email: a.string(),
       profileOwner: a.string(),
       conversations: a.hasMany("UserConversations", "userId"),
     })
-    .authorization((allow) => [
+    .authorization((allow: { ownerDefinedIn: (arg0: string) => any; }) => [
       allow.ownerDefinedIn("profileOwner"),
     ]),
   Conversation: a
@@ -50,7 +50,7 @@ const schema = a.schema({
       participants: a.hasMany("UserConversations", "conversationId"),
       createdAt: a.datetime().default(new Date().toISOString())
     })
-    .authorization((allow) => [allow.owner()]),
+    .authorization((allow: { owner: () => any; }) => [allow.owner()]),
   PlatformsConfiguration: a
     .model({
       id: a.id().required(),
@@ -68,7 +68,7 @@ const schema = a.schema({
         array: a.string().array(),
       }),
     })
-    .authorization((allow) => [allow.owner()]),
+    .authorization((allow: { owner: () => any; }) => [allow.owner()]),
   Organization: a.model({
     id: a.id().required(),
     name: a.string(),
@@ -76,9 +76,9 @@ const schema = a.schema({
     platformsConfiguration: a.hasOne("PlatformsConfiguration", "organizationId"),
     url: a.string(),
   })
-  .authorization((allow) => [allow.owner()]),
+  .authorization((allow: { owner: () => any; }) => [allow.owner()]),
 })
-.authorization((allow) => [allow.resource(postConfirmation)]);
+.authorization((allow: { resource: (arg0: any) => any; }) => [allow.resource(postConfirmation)]);
 
 export type Schema = ClientSchema<typeof schema>;
 
