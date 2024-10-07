@@ -1,18 +1,14 @@
 import React from "react";
 import { Heading } from "@aws-amplify/ui-react";
-import DataTable from "../../components/DataTable";
+import DataTable from "../../../components/DataTable";
 import type { Schema } from "@/amplify/data/resource";
 import { generateClient } from "aws-amplify/api";
 const client = generateClient<Schema>();
 
 const exampleColumns = [
   { key: "id", label: "ID" },
-  { key: "name", label: "Name" },
-  { key: "age", label: "Age" },
-  { key: "address.street", label: "Street" },
-  { key: "address.city", label: "City" },
-  { key: "address.country", label: "Country" },
-  { key: "hobbies", label: "Hobbies" },
+  { key: "content", label: "Content" },
+  { key: "createdAt", label: "Created" }
 ];
 
 const DataTableExample: React.FC = () => {
