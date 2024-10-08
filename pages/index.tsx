@@ -17,28 +17,9 @@ export default function App() {
         listTodos();
     }, []);
 
-    function createTodo() {
-        client.models.Todo.create({
-            content: window.prompt("Todo content"),
-        });
-    }
-
-    function deleteTodo(id: string) {
-        client.models.Todo.delete({ id });
-    }
-
-    function createConversation() {
-        client.models.Conversation.create({});
-    }
-
-    function addUserToConversation(userId: string, conversationId: string) {
-        client.models.UserConversations.create({ userId, conversationId });
-    }
-
-
     return (
         <>
-            landing page
+            Getting started
         </>
     );
 }
