@@ -9,15 +9,29 @@ interface DataTableProps {
   model: string;
   columns: Array<{ key: string; label: string }>;
   client: any;
+  subscribe?: boolean;
 }
 
-const DataTable: React.FC<DataTableProps> = ({ model, columns, client }) => {
+const DataTable: React.FC<DataTableProps> = ({ model, columns, client, subscribe = false }) => {
   const [data, setData] = useState<any[]>([]);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [editingRecord, setEditingRecord] = useState(null);
+  const [subscription, setSubscription] = useState<any>(null);
 
   useEffect(() => {
     fetchData();
+    if (subscribe) {
+      const sub = client.models[model].observeQuery().subscribe({
+        next: () => fetchData(),
+        error: (error: any) => console.error("Subscription error:", error),
+      });
+      setSubscription(sub);
+    }
+    return () => {
+      if (subscription) {
+        subscription.unsubscribe();
+      }
+    };
   }, []);
 
   const fetchData = async () => {

@@ -15,7 +15,7 @@ const DataTableExample: React.FC = () => {
   return (
     <div>
       <Heading level={1}>Data Table Example</Heading>
-      <DataTable model="Todo" columns={exampleColumns} client={client} />
+      <DataTable model="Todo" columns={exampleColumns} client={client} subscribe={true} />
     </div>
   );
 };
