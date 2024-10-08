@@ -1,17 +1,18 @@
 import React, { useState, useEffect } from "react";
-import { DataStore } from "@aws-amplify/datastore";
+// Remove this import as it's not needed in this component
 import { Table, Button } from "@aws-amplify/ui-react";
 import Modal from "./Modal";
 import DynamicForm from "./DynamicForm";
 import SortableTable from "./Table";
 
 interface DataTableProps {
-  model: any;
+  model: string;
   columns: Array<{ key: string; label: string }>;
+  client: any;
 }
 
-const DataTable: React.FC<DataTableProps> = ({ model, columns }) => {
-  const [data, setData] = useState<typeof model>([]);
+const DataTable: React.FC<DataTableProps> = ({ model, columns, client }) => {
+  const [data, setData] = useState<any[]>([]);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [editingRecord, setEditingRecord] = useState(null);
 
@@ -20,8 +21,13 @@ const DataTable: React.FC<DataTableProps> = ({ model, columns }) => {
   }, []);
 
   const fetchData = async () => {
-    const records = await DataStore.query(model);
-    setData(records);
+    try {
+      const { data: records } = await client.models[model].list({});
+      setData(records);
+    } catch (error) {
+      console.error("Error fetching data:", error);
+      // You might want to set an error state here and display it in the UI
+    }
   };
 
   const handleCreate = () => {
@@ -40,15 +46,21 @@ const DataTable: React.FC<DataTableProps> = ({ model, columns }) => {
   };
 
   const handleSave = async (newData: any) => {
-    if (editingRecord) {
-      await DataStore.save(model.copyOf(editingRecord, (updated: any) => {
-        Object.assign(updated, newData);
-      }));
-    } else {
-      await DataStore.save(new model(newData));
+    try {
+      if (editingRecord) {
+        await client.models[model].update({
+          id: editingRecord.id,
+          ...newData,
+        });
+      } else {
+        await client.models[model].create(newData);
+      }
+      fetchData();
+      handleCloseModal();
+    } catch (error) {
+      console.error("Error saving data:", error);
+      // You might want to set an error state here and display it in the UI
     }
-    fetchData();
-    handleCloseModal();
   };
 
   const tableColumns = [
