@@ -1,6 +1,6 @@
 import React from "react";
 import { View } from "@aws-amplify/ui-react";
-import { Table } from "./Table";
+import Table from "./Table";
 import DynamicForm from "./DynamicForm";
 
 interface PanelProps {
