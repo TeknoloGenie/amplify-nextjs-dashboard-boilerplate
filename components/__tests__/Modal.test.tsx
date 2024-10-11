@@ -30,14 +30,14 @@ describe("Modal", () => {
     expect(screen.queryByText("Modal content")).not.toBeInTheDocument();
   });
 
-  it("calls onClose when close button is clicked", () => {
+  it("calls onClose when top right close button with X is clicked", () => {
     render(
       <Modal isOpen={true} onClose={onCloseMock} title={title}>
         {children}
       </Modal>
     );
 
-    fireEvent.click(screen.getByText("Close"));
+    fireEvent.click(screen.getByTestId("top-right-close"));
     expect(onCloseMock).toHaveBeenCalledTimes(1);
   });
 
