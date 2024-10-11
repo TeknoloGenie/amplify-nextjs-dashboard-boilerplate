@@ -6,7 +6,8 @@ export default function ModalExample() {
 
     return (
         <div>
-            <h1>SortableTable Demo</h1>
+            <h1>This example filters by name property, but can filter by any and all, including deeply nested.</h1>
+            <br />
             <SortableTable
                 data={[
                     { id: 1, name: "Alice", age: 30, occupation: "Engineer" },
@@ -21,6 +22,8 @@ export default function ModalExample() {
                     { key: "age", label: "Age" },
                     { key: "occupation", label: "Occupation" },
                 ]}
+                filter
+                filterBy="name"
             />
         </div>
     )

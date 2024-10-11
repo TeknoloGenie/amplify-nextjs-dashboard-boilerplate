@@ -61,4 +61,48 @@ describe("SortableTable", () => {
     expect(rows).toHaveLength(2); // Header row + data row
     expect(rows[1]).toHaveTextContent("1Alice30");
   });
+
+  it("filters the table when using the filter input", () => {
+    render(<SortableTable data={sampleData} columns={columns} filter={true} filterBy="name" />);
+    
+    // Check initial state
+    expect(screen.getByText("Alice")).toBeInTheDocument();
+    expect(screen.getByText("Bob")).toBeInTheDocument();
+    expect(screen.getByText("Charlie")).toBeInTheDocument();
+
+    // Filter by name
+    const filterInput = screen.getByPlaceholderText("Filter by name");
+    fireEvent.change(filterInput, { target: { value: "alice" } });
+
+    // Check filtered state
+    expect(screen.getByText("Alice")).toBeInTheDocument();
+    expect(screen.queryByText("Bob")).not.toBeInTheDocument();
+    expect(screen.queryByText("Charlie")).not.toBeInTheDocument();
+
+    // Clear filter
+    fireEvent.change(filterInput, { target: { value: "" } });
+
+    // Check cleared state
+    expect(screen.getByText("Alice")).toBeInTheDocument();
+    expect(screen.getByText("Bob")).toBeInTheDocument();
+    expect(screen.getByText("Charlie")).toBeInTheDocument();
+  });
+
+  it("filters the table across all columns when filterBy is not specified", () => {
+    render(<SortableTable data={sampleData} columns={columns} filter={true} />);
+    
+    // Check initial state
+    expect(screen.getByText("Alice")).toBeInTheDocument();
+    expect(screen.getByText("Bob")).toBeInTheDocument();
+    expect(screen.getByText("Charlie")).toBeInTheDocument();
+
+    // Filter by age
+    const filterInput = screen.getByPlaceholderText("Filter by all columns");
+    fireEvent.change(filterInput, { target: { value: "30" } });
+
+    // Check filtered state
+    expect(screen.getByText("Alice")).toBeInTheDocument();
+    expect(screen.queryByText("Bob")).not.toBeInTheDocument();
+    expect(screen.queryByText("Charlie")).not.toBeInTheDocument();
+  });
 });

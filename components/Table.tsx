@@ -4,21 +4,40 @@ import { Table, TableBody, TableCell, TableHead, TableRow } from "@aws-amplify/u
 interface TableProps {
   data: Array<Record<string, any>>;
   columns: Array<{ key: string; label: string }>;
+  filter?: boolean;
+  filterBy?: string;
 }
 
-const SortableTable: React.FC<TableProps> = ({ data, columns }) => {
+const SortableTable: React.FC<TableProps> = ({ data, columns, filter = false, filterBy }) => {
   const [sortColumn, setSortColumn] = useState<string | null>(null);
   const [sortDirection, setSortDirection] = useState<"asc" | "desc">("asc");
+  const [filterValue, setFilterValue] = useState("");
 
-  const sortedData = useMemo(() => {
-    if (!sortColumn) return data;
+  const filteredAndSortedData = useMemo(() => {
+    let result = data;
+    
+    if (filter && filterValue) {
+      result = result.filter(row => {
+        if (filterBy) {
+          return String(row[filterBy]).toLowerCase().includes(filterValue.toLowerCase());
+        } else {
+          return Object.values(row).some(value =>
+            String(value).toLowerCase().includes(filterValue.toLowerCase())
+          );
+        }
+      });
+    }
 
-    return [...data].sort((a, b) => {
-      if (a[sortColumn] < b[sortColumn]) return sortDirection === "asc" ? -1 : 1;
-      if (a[sortColumn] > b[sortColumn]) return sortDirection === "asc" ? 1 : -1;
-      return 0;
-    });
-  }, [data, sortColumn, sortDirection]);
+    if (sortColumn) {
+      result = [...result].sort((a, b) => {
+        if (a[sortColumn] < b[sortColumn]) return sortDirection === "asc" ? -1 : 1;
+        if (a[sortColumn] > b[sortColumn]) return sortDirection === "asc" ? 1 : -1;
+        return 0;
+      });
+    }
+
+    return result;
+  }, [data, sortColumn, sortDirection, filter, filterValue, filterBy]);
 
   const handleSort = (columnKey: string) => {
     if (sortColumn === columnKey) {
@@ -39,9 +58,22 @@ const SortableTable: React.FC<TableProps> = ({ data, columns }) => {
             </TableCell>
           ))}
         </TableRow>
+        {filter && (
+          <TableRow>
+            <TableCell colSpan={columns.length}>
+              <input
+                type="text"
+                placeholder={`Filter by ${filterBy || "all columns"}`}
+                value={filterValue}
+                onChange={(e) => setFilterValue(e.target.value)}
+                style={{ width: "100%", padding: "8px", boxSizing: "border-box" }}
+              />
+            </TableCell>
+          </TableRow>
+        )}
       </TableHead>
       <TableBody>
-        {sortedData.map((row, index) => (
+        {filteredAndSortedData.map((row, index) => (
           <TableRow key={index}>
             {columns.map((column) => (
               <TableCell key={column.key}>{row[column.key]}</TableCell>
