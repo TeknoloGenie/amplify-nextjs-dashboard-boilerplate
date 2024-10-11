@@ -8,3 +8,6 @@ export const backend = defineBackend({
   data,
   storage: componentConfigStorage,
 });
+
+const { cfnIdentityPool } = backend.auth.resources.cfnResources;
+cfnIdentityPool.allowUnauthenticatedIdentities = false;

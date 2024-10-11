@@ -1,0 +1,14 @@
+{
+	"version": "2.0.0",
+	"tasks": [
+		{
+			"type": "npm",
+			"script": "lint",
+			"problemMatcher": [
+				"$tsc"
+			],
+			"label": "npm: lint",
+			"detail": "next lint --fix"
+		}
+	]
+}

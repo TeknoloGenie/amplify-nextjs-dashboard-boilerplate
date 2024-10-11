@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from "react";
-import { Input, Text, Flex, SwitchField } from "@aws-amplify/ui-react";
+import { Flex, Input, SwitchField, Text } from "@aws-amplify/ui-react";
+import React, { useCallback, useEffect, useState } from "react";
 
 export enum FormFieldType {
   Text = "text",
@@ -19,7 +19,7 @@ interface DynamicInputProps {
 }
 
 const DynamicInput: React.FC<DynamicInputProps> = ({ data, path, onChange, label, type = "text" }) => {
-  const getValue = (obj: any, path: string): any => {
+  const getValue = useCallback((obj: any, path: string): any => {
     try {
       const value = path.split(".").reduce((acc, part) => acc && acc[part], obj);
       
@@ -45,7 +45,7 @@ const DynamicInput: React.FC<DynamicInputProps> = ({ data, path, onChange, label
       console.error(`Error getting value for path: ${path}`, error);
       return undefined;
     }
-  };
+  }, [type]);
 
   const setValue = (obj: any, path: string, value: any): any => {
     const [head, ...rest] = path.split(".");
@@ -64,7 +64,7 @@ const DynamicInput: React.FC<DynamicInputProps> = ({ data, path, onChange, label
     const value = getValue(data, path);
     setInputValue(value !== undefined ? value : "");
     setError(value === undefined ? `Invalid path: ${path}` : null);
-  }, [data, path]);
+  }, [data, path, getValue]);
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     let newValue;

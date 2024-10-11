@@ -1,5 +1,4 @@
-import React from "react";
-import { render, screen, fireEvent, waitFor } from "@testing-library/react";
+import { fireEvent, render, screen } from "@testing-library/react";
 import DataTable from "../DataTable";
 
 const mockClient = {
@@ -31,10 +30,8 @@ describe("DataTable", () => {
   it("renders the table with data", async () => {
     render(<DataTable model="Todo" columns={mockColumns} client={mockClient} />);
 
-    await waitFor(() => {
-      expect(screen.getByText("John Doe")).toBeInTheDocument();
-      expect(screen.getByText("Jane Smith")).toBeInTheDocument();
-    });
+    expect(screen.getByText("John Doe")).toBeInTheDocument();
+    expect(screen.getByText("Jane Smith")).toBeInTheDocument();
   });
 
   it("opens create modal when create button is clicked", async () => {
@@ -42,18 +39,14 @@ describe("DataTable", () => {
 
     fireEvent.click(screen.getByText("Create New Record"));
 
-    await waitFor(() => {
-      expect(screen.getByText("Create New Record")).toBeInTheDocument();
-    });
+    expect(screen.getByText("Create New Record")).toBeInTheDocument();
   });
 
   it("opens edit modal when edit button is clicked", async () => {
     render(<DataTable model="Todo" columns={mockColumns} client={mockClient} />);
 
-    await waitFor(() => {
-      fireEvent.click(screen.getAllByText("Edit")[0]);
-      expect(screen.getByText("Edit Record")).toBeInTheDocument();
-    });
+    fireEvent.click(screen.getAllByText("Edit")[0]);
+    expect(screen.getByText("Edit Record")).toBeInTheDocument();
   });
 
   it("does not set up subscription when subscribe prop is false", () => {

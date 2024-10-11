@@ -1,8 +1,7 @@
-import React, { useState, useEffect } from "react";
-// Remove this import as it's not needed in this component
-import { Table, Button } from "@aws-amplify/ui-react";
-import Modal from "./Modal";
+import { Button } from "@aws-amplify/ui-react";
+import React, { useCallback, useEffect, useState } from "react";
 import DynamicForm from "./DynamicForm";
+import Modal from "./Modal";
 import SortableTable from "./Table";
 
 interface DataTableProps {
@@ -15,8 +14,18 @@ interface DataTableProps {
 const DataTable: React.FC<DataTableProps> = ({ model, columns, client, subscribe = false }) => {
   const [data, setData] = useState<any[]>([]);
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [editingRecord, setEditingRecord] = useState(null);
+  const [editingRecord, setEditingRecord] = useState<any>(null);
   const [subscription, setSubscription] = useState<any>(null);
+
+  const fetchData = useCallback(async () => {
+    try {
+      const { data: records } = await client.models[model].list({});
+      setData(records);
+    } catch (error) {
+      console.error("Error fetching data:", error);
+      // You might want to set an error state here and display it in the UI
+    }
+  }, [client.models, model]);
 
   useEffect(() => {
     fetchData();
@@ -32,17 +41,7 @@ const DataTable: React.FC<DataTableProps> = ({ model, columns, client, subscribe
         subscription.unsubscribe();
       }
     };
-  }, []);
-
-  const fetchData = async () => {
-    try {
-      const { data: records } = await client.models[model].list({});
-      setData(records);
-    } catch (error) {
-      console.error("Error fetching data:", error);
-      // You might want to set an error state here and display it in the UI
-    }
-  };
+  }, [client.models, fetchData, model, subscribe, subscription]);
 
   const handleCreate = () => {
     setEditingRecord(null);
