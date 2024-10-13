@@ -1,7 +1,6 @@
-import React from "react";
-import { render, fireEvent, screen, waitFor } from "@testing-library/react";
 import { DataStore } from "@aws-amplify/datastore";
-import DynamicForm from "../DynamicForm";
+import { fireEvent, render, screen, waitFor } from "@testing-library/react";
+import DynamicForm from "./";
 
 jest.mock("@aws-amplify/datastore");
 

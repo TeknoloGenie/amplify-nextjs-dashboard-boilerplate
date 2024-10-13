@@ -1,15 +1,14 @@
 /* eslint-disable testing-library/no-node-access */
-import React from "react";
 import { render, screen } from "@testing-library/react";
-import Panel from "../Panel";
-import Table from "../Table";
-import DynamicForm from "../DynamicForm";
+import DynamicForm from "../dynamic-form";
+import SortableTable from "../table";
+import Panel from "./";
 
 describe("Panel", () => {
   it("renders correctly with title and children", () => {
     render(
       <Panel id="test-panel" title="Test Panel" minWidth="w-1/2" minHeight="h-64">
-        <Table data={[]} columns={[]} />
+        <SortableTable data={[]} columns={[]} />
         <DynamicForm data={{}} onChange={() => {}} />
       </Panel>
     );
@@ -50,10 +49,10 @@ describe("Panel", () => {
     expect(panelElement).toHaveAttribute("id", "test-panel");
   });
 
-  it("only renders Table and DynamicForm components as children", () => {
+  it("only renders SortableTable and DynamicForm components as children", () => {
     render(
       <Panel id="test-panel" title="Test Panel" minWidth="w-1/2" minHeight="h-64">
-        <Table data={[]} columns={[]} />
+        <SortableTable data={[]} columns={[]} />
         <DynamicForm data={{}} onChange={() => {}} />
         <div>This should not render</div>
       </Panel>

@@ -1,6 +1,6 @@
+import { Text, View } from "@aws-amplify/ui-react";
 import React, { useState } from "react";
-import { View, Text } from "@aws-amplify/ui-react";
-import ColorSelection from "../../../components/ColorSelection";
+import ColorSelection from "../../../components/color-selection";
 
 const ColorSelectionExample: React.FC = () => {
   const [color, setColor] = useState("#ff0000");

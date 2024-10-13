@@ -1,5 +1,4 @@
-import React from "react";
-import MenuLinks from "@/components/MenuLinks";
+import MenuLinks from "@/components/menu-links";
 
 const MenuLinksExample = () => {
   const menuItems = [

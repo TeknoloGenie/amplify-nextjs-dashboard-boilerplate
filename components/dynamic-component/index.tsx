@@ -1,6 +1,6 @@
-import React from "react";
 import * as UI from "@aws-amplify/ui-react";
-import { AmplifyUIComponentType } from "./types";
+import React from "react";
+import { AmplifyUIComponentType } from "../types";
 
 export interface DynamicComponentProps {
   options: {

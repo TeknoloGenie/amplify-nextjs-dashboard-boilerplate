@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import MultiSelectField from "@/components/MultiSelectField";
+import MultiSelectField from "@/components/multi-select-field";
+import { useState } from "react";
 
 const options = [
   { value: "option1", label: "Option 1" },

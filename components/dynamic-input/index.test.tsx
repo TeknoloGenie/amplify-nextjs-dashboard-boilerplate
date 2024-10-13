@@ -1,6 +1,5 @@
-import React from "react";
-import { render, fireEvent, screen } from "@testing-library/react";
-import DynamicInput from "../DynamicInput";
+import { fireEvent, render, screen } from "@testing-library/react";
+import DynamicInput from "./";
 
 describe("DynamicInput", () => {
   test("renders with default props", () => {

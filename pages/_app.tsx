@@ -1,18 +1,18 @@
+import outputs from "@/amplify_outputs.json";
+import MenuLinks from "@/components/menu-links";
 import "@/styles/app.css";
 import "@/styles/globals.css";
-import type { AppProps } from "next/app";
-import { Amplify } from "aws-amplify";
-import outputs from "@/amplify_outputs.json";
+import { Authenticator, Button, Card, Flex, Heading, Text, View } from "@aws-amplify/ui-react";
 import "@aws-amplify/ui-react/styles.css";
-import { Authenticator, Grid, Card, Button, Text, Flex, Heading, View } from "@aws-amplify/ui-react"
-import MenuLinks from "@/components/MenuLinks";
-import "tailwindcss/tailwind.css"
+import { Amplify } from "aws-amplify";
+import type { AppProps } from "next/app";
+import "tailwindcss/tailwind.css";
 Amplify.configure(outputs);
 
 export default function App({ Component, pageProps }: AppProps) {
 	return (
 		<Authenticator>
-			{({ signOut, user }) => (
+			{({ signOut }) => (
 				<View style={{
 				  display: "grid",
 				  gridTemplateColumns: "250px 1fr",

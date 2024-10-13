@@ -1,7 +1,7 @@
+import DynamicForm from "@/components/dynamic-form";
+import { FormFieldType } from "@/components/dynamic-input";
+import { Button, Flex, Heading, Text } from "@aws-amplify/ui-react";
 import React, { useState } from "react";
-import { Flex, Heading, Text, Button } from "@aws-amplify/ui-react";
-import DynamicForm from "@/components/DynamicForm";
-import { FormFieldType } from "@/components/DynamicInput";
 
 // Mock model for demonstration purposes
 const MockModel = {

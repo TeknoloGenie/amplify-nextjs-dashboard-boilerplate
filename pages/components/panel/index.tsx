@@ -1,7 +1,7 @@
+import DynamicForm from "@/components/dynamic-form";
+import Panel from "@/components/panel";
+import Table from "@/components/table";
 import React from "react";
-import Panel from "@/components/Panel";
-import Table  from "@/components/Table";
-import DynamicForm  from "@/components/DynamicForm";
 
 const PanelExample: React.FC = () => {
   return (

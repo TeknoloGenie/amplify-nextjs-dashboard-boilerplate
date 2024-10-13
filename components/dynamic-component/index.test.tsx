@@ -1,6 +1,5 @@
-import React from "react";
 import { render, screen } from "@testing-library/react";
-import DynamicComponent from "../DynamicComponent";
+import DynamicComponent from "./";
 
 describe("DynamicComponent", () => {
   it("renders a Text component", () => {

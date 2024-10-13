@@ -1,6 +1,5 @@
-import React from "react";
-import { render, fireEvent, screen } from "@testing-library/react";
-import Popover from "../Popover";
+import { fireEvent, render, screen } from "@testing-library/react";
+import Popover from "./";
 
 describe("Popover", () => {
   const mockOnClose = jest.fn();

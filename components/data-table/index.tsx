@@ -1,8 +1,8 @@
 import { Button } from "@aws-amplify/ui-react";
 import React, { useCallback, useEffect, useState } from "react";
-import DynamicForm from "./DynamicForm";
-import Modal from "./Modal";
-import SortableTable from "./Table";
+import DynamicForm from "../dynamic-form";
+import Modal from "../modal";
+import SortableTable from "../table";
 
 interface DataTableProps {
   model: string;

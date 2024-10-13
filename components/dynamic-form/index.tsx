@@ -1,7 +1,7 @@
-import React, { useState, useEffect } from "react";
-import { Flex, Button } from "@aws-amplify/ui-react";
 import { DataStore } from "@aws-amplify/datastore";
-import DynamicInput from "./DynamicInput";
+import { Button, Flex } from "@aws-amplify/ui-react";
+import React, { useEffect, useState } from "react";
+import DynamicInput from "../dynamic-input";
 
 export enum FormFieldType {
   Text = "text",

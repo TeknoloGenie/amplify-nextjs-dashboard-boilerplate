@@ -1,6 +1,5 @@
-import React from "react";
-import { render, fireEvent, screen } from "@testing-library/react";
-import MultiSelectField from "../MultiSelectField";
+import { fireEvent, render, screen } from "@testing-library/react";
+import MultiSelectField from ".";
 
 const mockOptions = [
   { value: "option1", label: "Option 1" },

@@ -1,6 +1,5 @@
-import React from "react";
-import { render, fireEvent, screen } from "@testing-library/react";
-import OrderedList from "../OrderedList";
+import { fireEvent, render, screen } from "@testing-library/react";
+import OrderedList from "./";
 
 describe("OrderedList", () => {
   const mockData = [

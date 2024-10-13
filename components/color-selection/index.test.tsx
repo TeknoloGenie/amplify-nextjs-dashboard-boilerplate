@@ -1,6 +1,5 @@
-import React from "react";
-import { render, fireEvent, screen } from "@testing-library/react";
-import ColorSelection from "../ColorSelection";
+import { fireEvent, render, screen } from "@testing-library/react";
+import ColorSelection from ".";
 
 describe("ColorSelection", () => {
 

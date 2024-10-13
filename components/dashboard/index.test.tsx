@@ -1,5 +1,5 @@
 import { render, screen } from "@testing-library/react";
-import Dashboard from "../Dashboard";
+import Dashboard from ".";
 
 describe("Dashboard", () => {
   it("renders panels based on provided configuration", () => {

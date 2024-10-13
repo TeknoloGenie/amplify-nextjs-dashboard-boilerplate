@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import Autocomplete from "@/components/Autocomplete";
+import Autocomplete from "@/components/autocomplete";
+import { useState } from "react";
 
 const options = [
   { id: "1", name: "Option 1" },

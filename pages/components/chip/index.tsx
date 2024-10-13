@@ -1,5 +1,5 @@
+import Chip from "@/components/chip";
 import React, { useState } from "react";
-import Chip from "@/components/Chip";
 
 const ChipExample: React.FC = () => {
   const [value, setValue] = useState("");

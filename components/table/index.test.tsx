@@ -1,6 +1,5 @@
-import React from "react";
-import { render, screen, fireEvent } from "@testing-library/react";
-import SortableTable from "../Table";
+import { fireEvent, render, screen } from "@testing-library/react";
+import SortableTable from "./";
 
 const sampleData = [
   { id: 1, name: "Alice", age: 30 },

@@ -1,6 +1,5 @@
-import React from "react";
-import { render, fireEvent, screen } from "@testing-library/react";
-import Chip from "../Chip";
+import { fireEvent, render, screen } from "@testing-library/react";
+import Chip from ".";
 
 describe("Chip component", () => {
   it("renders input field", () => {

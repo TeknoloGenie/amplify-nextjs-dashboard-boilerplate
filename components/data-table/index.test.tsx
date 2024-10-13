@@ -1,5 +1,5 @@
 import { fireEvent, render, screen } from "@testing-library/react";
-import DataTable from "../DataTable";
+import DataTable from "./";
 
 const mockClient = {
   models: {

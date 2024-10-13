@@ -1,7 +1,7 @@
-import React from "react";
 import { View } from "@aws-amplify/ui-react";
-import Table from "./Table";
-import DynamicForm from "./DynamicForm";
+import React from "react";
+import DynamicForm from "../dynamic-form";
+import Table from "../table";
 
 interface PanelProps {
   id: string;
@@ -15,7 +15,7 @@ interface PanelProps {
   children: React.ReactNode;
 }
 
-const Panel: React.FC<PanelProps> = ({ id, title, minWidth, minHeight, location, children }) => {
+const Panel: React.FC<PanelProps> = ({ id, title, minWidth, minHeight, children }) => {
   return (
     <View
       as="div"

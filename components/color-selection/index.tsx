@@ -1,6 +1,4 @@
-import React, { useState, useRef } from "react";
-import { View } from "@aws-amplify/ui-react";
-import Popover from "./Popover";
+import React, { useRef, useState } from "react";
 
 interface ColorSelectionProps {
   value: string;

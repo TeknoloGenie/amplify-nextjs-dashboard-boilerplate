@@ -1,7 +1,6 @@
-import React from "react";
-import { render, screen, fireEvent } from "@testing-library/react";
 import "@testing-library/jest-dom";
-import Modal from "../Modal";
+import { fireEvent, render, screen } from "@testing-library/react";
+import Modal from "./";
 
 describe("Modal", () => {
   const onCloseMock = jest.fn();

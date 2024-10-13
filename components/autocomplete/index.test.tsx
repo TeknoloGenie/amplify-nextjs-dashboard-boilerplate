@@ -1,6 +1,5 @@
-import React from "react";
-import { render, fireEvent, screen, waitFor } from "@testing-library/react";
-import Autocomplete from "../Autocomplete";
+import { fireEvent, render, screen, waitFor } from "@testing-library/react";
+import Autocomplete from ".";
 
 describe("Autocomplete", () => {
   const mockOptions = [
