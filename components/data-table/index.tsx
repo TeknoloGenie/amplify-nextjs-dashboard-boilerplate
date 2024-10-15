@@ -16,6 +16,7 @@ const DataTable: React.FC<DataTableProps> = ({ model, columns, client, subscribe
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [editingRecord, setEditingRecord] = useState<any>(null);
   const [subscription, setSubscription] = useState<any>(null);
+  const [initatedSub, setInitiatedSub] = useState(false);
 
   const fetchData = useCallback(async () => {
     try {
@@ -29,19 +30,20 @@ const DataTable: React.FC<DataTableProps> = ({ model, columns, client, subscribe
 
   useEffect(() => {
     fetchData();
-    if (subscribe) {
+    if (subscribe && !initatedSub) {
       const sub = client.models[model].observeQuery().subscribe({
         next: () => fetchData(),
         error: (error: any) => console.error("Subscription error:", error),
       });
       setSubscription(sub);
+      setInitiatedSub(true);
     }
     return () => {
       if (subscription) {
         subscription.unsubscribe();
       }
     };
-  }, [client.models, fetchData, model, subscribe, subscription]);
+  }, [client.models, fetchData, model, subscribe, subscription, initatedSub]);
 
   const handleCreate = () => {
     setEditingRecord(null);
@@ -99,7 +101,7 @@ const DataTable: React.FC<DataTableProps> = ({ model, columns, client, subscribe
         <DynamicForm
           data={editingRecord || {}}
           onChange={handleSave}
-          model={model}
+          model={client.models[model]}
         />
       </Modal>
     </div>
