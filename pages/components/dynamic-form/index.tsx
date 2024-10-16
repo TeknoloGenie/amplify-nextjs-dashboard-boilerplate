@@ -3,10 +3,8 @@ import { FormFieldType } from "@/components/dynamic-input";
 import { Button, Flex, Heading, Text } from "@aws-amplify/ui-react";
 import React, { useState } from "react";
 
+
 // Mock model for demonstration purposes
-const MockModel = {
-  // Add necessary model methods here
-};
 
 const DynamicFormExample: React.FC = () => {
   const [data, setData] = useState({
@@ -28,24 +26,6 @@ const DynamicFormExample: React.FC = () => {
     isStudent: { type: FormFieldType.Boolean, label: "Student Status" },
   };
 
-  const resource = {
-    fields: {
-      name: { type: FormFieldType.Text },
-      age: { type: FormFieldType.Number },
-      email: { type: FormFieldType.Text },
-      birthdate: { type: FormFieldType.Date },
-      isStudent: { type: FormFieldType.Boolean },
-      address: {
-        type: FormFieldType.Object,
-        fields: {
-          street: { type: FormFieldType.Text },
-          city: { type: FormFieldType.Text },
-          country: { type: FormFieldType.Text },
-        },
-      },
-    },
-  };
-
   const handleChange = (newData: any) => {
     setData(newData);
   };
@@ -58,7 +38,6 @@ const DynamicFormExample: React.FC = () => {
         data={data}
         onChange={handleChange}
         options={options}
-        resource={resource}
         model={MockModel}
       />
       

@@ -89,7 +89,7 @@ const DynamicForm: React.FC<DynamicFormProps> = ({ data, onChange, options = {},
 
     try {
       if (isNewRecord) {
-        await DataStore.save(new model(data));
+        await model.create(data);
       } else {
         const original = await DataStore.query(model, data.id);
         if (original) {
