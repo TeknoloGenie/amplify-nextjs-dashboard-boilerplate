@@ -1,4 +1,3 @@
-import { DataStore } from "@aws-amplify/datastore";
 import { Button, Flex } from "@aws-amplify/ui-react";
 import React, { useEffect, useState } from "react";
 import DynamicInput from "../dynamic-input";
@@ -89,13 +88,12 @@ const DynamicForm: React.FC<DynamicFormProps> = ({ data, onChange, options = {},
 
     try {
       if (isNewRecord) {
-        await model.create(data);
+        const newRecord = await model.create(data);
+        console.log("New record created:", newRecord.data);
       } else {
-        const original = await DataStore.query(model, data.id);
+        const original = await model.query(model, data.id);
         if (original) {
-          await DataStore.save(model.copyOf(original, (updated: any) => {
-            Object.assign(updated, data);
-          }));
+          await model.update(data);
         }
       }
       console.log("Record saved successfully");
@@ -111,9 +109,9 @@ const DynamicForm: React.FC<DynamicFormProps> = ({ data, onChange, options = {},
     }
 
     try {
-      const toDelete = await DataStore.query(model, data.id);
+      const toDelete = await model.query(model, data.id);
       if (toDelete) {
-        await DataStore.delete(toDelete);
+        await model.delete(toDelete);
         console.log("Record deleted successfully");
       }
     } catch (error) {
@@ -125,7 +123,7 @@ const DynamicForm: React.FC<DynamicFormProps> = ({ data, onChange, options = {},
     <Flex direction="column" gap="1rem">
       {renderFormFields(data)}
       <Flex gap="1rem">
-        <Button onClick={handleSave}>{isNewRecord ? "Create" : "Update"}</Button>
+        <Button className="rounded-lg px-4 py-2 bg-green-700 text-green-100 hover:bg-green-800 duration-300" onClick={handleSave}>{isNewRecord ? "Create" : "Update"}</Button>
         {!isNewRecord && <Button onClick={handleDelete}>Delete</Button>}
       </Flex>
     </Flex>

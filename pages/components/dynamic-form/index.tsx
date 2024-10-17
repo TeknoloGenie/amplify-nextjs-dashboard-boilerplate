@@ -1,44 +1,52 @@
+import { Schema } from "@/amplify/data/resource";
 import DynamicForm from "@/components/dynamic-form";
 import { FormFieldType } from "@/components/dynamic-input";
 import { Button, Flex, Heading, Text } from "@aws-amplify/ui-react";
-import React, { useState } from "react";
+import { generateClient } from "aws-amplify/api";
+import { useState } from "react";
 
-
-// Mock model for demonstration purposes
+const client = generateClient<Schema>();
 
 const DynamicFormExample: React.FC = () => {
   const [data, setData] = useState({
-    name: "John Doe",
-    age: 30,
-    email: "john@example.com",
-    birthdate: "1990-01-01",
-    isStudent: true,
-    address: {
-      street: "123 Main St",
-      city: "Anytown",
-      country: "USA",
-    },
+    firstName: "John",
+    lastName: "Doe",
+    email: "john.doe@example.com",
+    phoneNumber: "000000000000",
+    address: "123 Main St",
+    city: "Anytown",
+    state: "CA",
+    zipCode: "12345",
+    country: "USA",
+    title: "Mr.",
   });
 
   const options = {
-    age: { type: FormFieldType.Number, label: "Age" },
-    birthdate: { type: FormFieldType.Date, label: "Date of Birth" },
-    isStudent: { type: FormFieldType.Boolean, label: "Student Status" },
+    firstName: { type: FormFieldType.Text, label: "First Name" },
+    lastName: { type: FormFieldType.Text, label: "Last Name" },
+    email: { type: FormFieldType.Text, label: "Email" },
+    phoneNumber: { type: FormFieldType.Text, label: "Phone" },
+    address: { type: FormFieldType.Text, label: "Address" },
+    city: { type: FormFieldType.Text, label: "City" },
+    state: { type: FormFieldType.Text, label: "State" },
+    zipCode: { type: FormFieldType.Text, label: "Zip Code" },
+    country: { type: FormFieldType.Text, label: "Country" },
+    title: { type: FormFieldType.Text, label: "Title" },
   };
 
-  const handleChange = (newData: any) => {
+  const handleChange = (newData: React.SetStateAction<any>) => {
     setData(newData);
   };
 
   return (
     <Flex direction="column" gap="1rem">
-      <Heading level={2}>Dynamic Form Example</Heading>
+      <Heading level={2}>Contact Form Example</Heading>
       
       <DynamicForm
         data={data}
         onChange={handleChange}
         options={options}
-        model={MockModel}
+        model={client.models.Contact}
       />
       
       <Button onClick={() => console.log(data)}>Log Current Data</Button>
