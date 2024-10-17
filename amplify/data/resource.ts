@@ -8,14 +8,34 @@ specifies that any user authenticated via an API key can "create", "read",
 "update", and "delete" any "Todo" records.
 =========================================================================*/
 const schema = a.schema({
+  Contact: a
+    .model({
+      id: a.id().required(),
+      firstName: a.string(),
+      lastName: a.string(),
+      email: a.string(),
+      phoneNumber: a.string(),
+      address: a.string(),
+      city: a.string(),
+      state: a.string(),
+      zipCode: a.string(),
+      country: a.string(),
+      title: a.string(),
+      organizationId: a.id(),
+      organization: a.belongsTo("Organization", "organizationId"),
+      createdAt: a.datetime().default(new Date().toISOString())
+    })
+    .authorization((allow: { publicApiKey: () => any; }) => [allow.publicApiKey()]),
   Todo: a
     .model({
+      id: a.id().required(),
       content: a.string(),
       createdAt: a.datetime().default(new Date().toISOString())
     })
     .authorization((allow: { publicApiKey: () => any; }) => [allow.publicApiKey()]),
   Message: a
     .model({
+      id: a.id().required(),
       message: a.string(),
       conversation: a.belongsTo("Conversation", "conversationId"),
       conversationId: a.id().required(),
@@ -36,6 +56,7 @@ const schema = a.schema({
     .authorization((allow: { owner: () => any; }) => [allow.owner()]),
   User: a
     .model({
+      id: a.id().required(),
       email: a.string(),
       profileOwner: a.string(),
       conversations: a.hasMany("UserConversations", "userId"),
@@ -75,6 +96,7 @@ const schema = a.schema({
     address: a.integer(),
     platformsConfiguration: a.hasOne("PlatformsConfiguration", "organizationId"),
     url: a.string(),
+    contacts: a.hasMany("Contact", "organizationId")
   })
   .authorization((allow: { owner: () => any; }) => [allow.owner()]),
 })
