@@ -3,6 +3,10 @@
 
 This project is a boilerplate for quickly setting up a dashboard-style application using NextJS, Tailwind CSS, AWS Amplify Gen 2, and Amplify UI. It's designed to help developers get up and running quickly with a modern, scalable, and cloud-ready web application.
 
+## Asana Project
+
+Feel free to join the [Asana Project](https://app.asana.com/0/1208242204798946/1208242185430914)!
+
 ## Features
 
 - **NextJS**: React framework for production-grade applications
