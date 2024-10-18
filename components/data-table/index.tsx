@@ -100,7 +100,8 @@ const DataTable: React.FC<DataTableProps> = ({ model, columns, client, subscribe
       >
         <DynamicForm
           data={editingRecord || {}}
-          onChange={handleSave}
+          onChange={setEditingRecord}
+          onSubmit={handleSave}
           model={client.models[model]}
         />
       </Modal>

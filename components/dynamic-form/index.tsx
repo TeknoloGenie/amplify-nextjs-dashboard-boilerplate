@@ -14,6 +14,7 @@ export enum FormFieldType {
 interface DynamicFormProps {
   data: any;
   onChange: (newData: any) => void;
+  onSubmit?: (newData: any) => void;
   options?: {
     [key: string]: {
       type: FormFieldType;
@@ -30,7 +31,7 @@ interface DynamicFormProps {
   model?: any;
 }
 
-const DynamicForm: React.FC<DynamicFormProps> = ({ data, onChange, options = {}, resource, model }) => {
+const DynamicForm: React.FC<DynamicFormProps> = ({ data, onChange, onSubmit, options = {}, resource, model }) => {
   const [isNewRecord, setIsNewRecord] = useState(false);
 
   useEffect(() => {
@@ -81,6 +82,10 @@ const DynamicForm: React.FC<DynamicFormProps> = ({ data, onChange, options = {},
   };
 
   const handleSave = async () => {
+    if (onSubmit) {
+      onSubmit(data);
+      return;
+    }
     if (!model) {
       console.error("Model is not defined");
       return;
