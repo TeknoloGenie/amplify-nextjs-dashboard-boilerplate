@@ -1,9 +1,13 @@
-import React, { useState, useMemo } from "react";
 import { Table, TableBody, TableCell, TableHead, TableRow } from "@aws-amplify/ui-react";
+import React, { useMemo, useState } from "react";
 
 interface TableProps {
   data: Array<Record<string, any>>;
-  columns: Array<{ key: string; label: string }>;
+  columns: Array<{
+    key: string;
+    label: string;
+    render?: (row: Record<string, any>) => React.ReactNode;
+  }>;
   filter?: boolean;
   filterBy?: string;
 }
@@ -76,7 +80,9 @@ const SortableTable: React.FC<TableProps> = ({ data, columns, filter = false, fi
         {filteredAndSortedData.map((row, index) => (
           <TableRow key={index}>
             {columns.map((column) => (
-              <TableCell key={column.key}>{row[column.key]}</TableCell>
+              <TableCell key={column.key}>
+                {column.render ? column.render(row) : row[column.key]}
+              </TableCell>
             ))}
           </TableRow>
         ))}
