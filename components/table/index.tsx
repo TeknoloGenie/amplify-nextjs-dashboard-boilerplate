@@ -6,7 +6,7 @@ interface TableProps {
   columns: Array<{
     key: string;
     label: string;
-    render?: (row: Record<string, any>) => React.ReactNode;
+    template?: (row: Record<string, any>) => React.ReactNode;
   }>;
   filter?: boolean;
   filterBy?: string;
@@ -81,7 +81,7 @@ const SortableTable: React.FC<TableProps> = ({ data, columns, filter = false, fi
           <TableRow key={index}>
             {columns.map((column) => (
               <TableCell key={column.key}>
-                {column.render ? column.render(row) : row[column.key]}
+                {column.template ? column.template(row) : row[column.key]}
               </TableCell>
             ))}
           </TableRow>
