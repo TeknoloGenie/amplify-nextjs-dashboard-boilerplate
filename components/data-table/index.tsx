@@ -83,7 +83,7 @@ const DataTable: React.FC<DataTableProps> = ({ model, columns, client, subscribe
     {
       key: "actions",
       label: "Actions",
-      render: (record: any) => (
+      template: (record: any) => (
         <Button onClick={() => handleEdit(record)}>Edit</Button>
       ),
     },
