@@ -9,10 +9,14 @@ The Table component renders a sortable table with customizable columns and data.
 - Allows custom rendering of cell content
 
 ## Props
-- `data`: Array of objects representing table rows
-- `columns`: Array of column configurations (key, label, render function)
-- `initialSortColumn`: Optional initial column to sort by
-- `initialSortDirection`: Optional initial sort direction ('asc' or 'desc')
+- `data`: Array of objects representing table rows (Array<Record<string, any>>)
+- `columns`: Array of column configurations (Array<{
+    key: string;
+    label: string;
+    template?: (row: Record<string, any>) => React.ReactNode;
+  }>)
+- `filter`: Enable/disable filtering (boolean, optional)
+- `filterBy`: Column key to filter by (string, optional)
 
 ## Usage
 This component is useful for displaying and organizing large sets of data, especially when sorting capabilities are needed.

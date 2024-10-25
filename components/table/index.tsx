@@ -7,6 +7,7 @@ interface TableProps {
     key: string;
     label: string;
     template?: (row: Record<string, any>) => React.ReactNode;
+    headerTemplate?: (column: { key: string; label: string }, sortInfo: { sortColumn: string | null; sortDirection: "asc" | "desc" }) => React.ReactNode;
   }>;
   filter?: boolean;
   filterBy?: string;
@@ -56,11 +57,17 @@ const SortableTable: React.FC<TableProps> = ({ data, columns, filter = false, fi
     <Table>
       <TableHead>
         <TableRow>
-          {columns.map((column) => (
-            <TableCell key={column.key} onClick={() => handleSort(column.key)}>
-              {column.label} {sortColumn === column.key && (sortDirection === "asc" ? "▲" : "▼")}
-            </TableCell>
-          ))}
+        {columns.map((column) => (
+          <TableCell key={column.key} onClick={() => handleSort(column.key)}>
+            {column.headerTemplate ? (
+              column.headerTemplate(column, { sortColumn, sortDirection })
+            ) : (
+              <>
+                {column.label} {sortColumn === column.key && (sortDirection === "asc" ? "▲" : "▼")}
+              </>
+            )}
+          </TableCell>
+        ))}
         </TableRow>
         {filter && (
           <TableRow>

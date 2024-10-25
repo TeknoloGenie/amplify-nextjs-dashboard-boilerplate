@@ -9,10 +9,10 @@ The ColorSelection component provides a color picker interface for users to sele
 - Supports output in both HEX and RGB formats
 
 ## Props
-- `value`: Current color value
-- `onChange`: Function called when color changes
-- `className`: Optional CSS class for styling
-- `output`: Specifies output format ('rgb' or 'hex', default is 'hex')
+- `value`: Current color value (string)
+- `onChange`: Function called when color changes ((value: string) => void)
+- `className`: Optional CSS class for styling (string | undefined)
+- `output`: Specifies output format ('rgb' or 'hex', default is 'hex') ('rgb' | 'hex' | undefined)
 
 ## Usage
 This component is useful in applications where color selection is required, such as in design tools, theme customization, or any scenario where users need to pick colors.
