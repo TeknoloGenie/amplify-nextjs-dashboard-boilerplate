@@ -7,6 +7,10 @@ This project is a boilerplate for quickly setting up a dashboard-style applicati
 
 Feel free to join the [Asana Project](https://app.asana.com/0/1208242204798946/1208242185430914)!
 
+## NodeGeeks
+
+Check out the geeks behind the project, [visit our NodeGeeks website](https://nodegeeksllc.com), or [join our discord](https://discord.gg/rKstj8mcfE)!
+
 ## Features
 
 - **NextJS**: React framework for production-grade applications
