@@ -1,6 +1,6 @@
-import React, { useState, useRef } from "react";
-import { View, Button, Text } from "@aws-amplify/ui-react";
-import Popover from "../../../components/popover";
+import Popover from "@/components/popover";
+import { Button, Text, View } from "@aws-amplify/ui-react";
+import { useRef, useState } from "react";
 
 export default function PopoverExample() {
   const [isPopoverVisible, setIsPopoverVisible] = useState(false);
