@@ -1,6 +1,6 @@
-import React from "react";
 import { View } from "@aws-amplify/ui-react";
-import Panel from "./Panel";
+import React from "react";
+import Panel from "../panel";
 
 interface PanelConfig {
   id: string;
