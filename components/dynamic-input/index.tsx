@@ -15,7 +15,7 @@ interface DynamicInputProps {
   path: string;
   onChange: (newData: any) => void;
   label?: string;
-  type?: FormFieldType;
+  type?: string;
 }
 
 const DynamicInput: React.FC<DynamicInputProps> = ({ data, path, onChange, label, type = "text" }) => {

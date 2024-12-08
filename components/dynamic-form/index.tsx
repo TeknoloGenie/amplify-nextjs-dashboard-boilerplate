@@ -17,14 +17,14 @@ interface DynamicFormProps {
   onSubmit?: (newData: any) => void;
   options?: {
     [key: string]: {
-      type: FormFieldType;
+      type: string;
       label?: string;
     };
   };
   resource?: {
     fields: {
       [key: string]: {
-        type: FormFieldType;
+        type: string;
       };
     };
   };
