@@ -1,4 +1,5 @@
 /* eslint-disable testing-library/no-node-access */
+import "@testing-library/jest-dom";
 import { render, screen } from "@testing-library/react";
 import DynamicForm from "../dynamic-form";
 import SortableTable from "../table";
@@ -8,8 +9,8 @@ describe("Panel", () => {
   it("renders correctly with title and children", () => {
     render(
       <Panel id="test-panel" title="Test Panel" minWidth="w-1/2" minHeight="h-64">
-        <SortableTable data={[]} columns={[]} />
-        <DynamicForm data={{}} onChange={() => {}} />
+        <SortableTable test-id="table" data={[]} columns={[]} />
+        <DynamicForm test-id="dynamic-form" data={{}} onChange={() => {}} />
       </Panel>
     );
 
@@ -52,8 +53,8 @@ describe("Panel", () => {
   it("only renders SortableTable and DynamicForm components as children", () => {
     render(
       <Panel id="test-panel" title="Test Panel" minWidth="w-1/2" minHeight="h-64">
-        <SortableTable data={[]} columns={[]} />
-        <DynamicForm data={{}} onChange={() => {}} />
+        <SortableTable test-id="table" data={[]} columns={[]} />
+        <DynamicForm test-id="dynamic-form" data={{}} onChange={() => {}} />
         <div>This should not render</div>
       </Panel>
     );

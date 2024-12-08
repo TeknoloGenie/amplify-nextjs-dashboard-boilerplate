@@ -1,4 +1,5 @@
 import { DataStore } from "@aws-amplify/datastore";
+import "@testing-library/jest-dom";
 import { fireEvent, render, screen, waitFor } from "@testing-library/react";
 import DynamicForm from "./";
 
@@ -36,6 +37,10 @@ describe("DynamicForm", () => {
   };
 
   const mockModel = {
+    save: jest.fn(),
+    get: jest.fn(),
+    delete: jest.fn(),
+    query: jest.fn(),
     copyOf: jest.fn((original, callback) => {
       const copy = { ...original };
       callback(copy);

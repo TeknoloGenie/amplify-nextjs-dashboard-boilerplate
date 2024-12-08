@@ -76,6 +76,7 @@ const DynamicForm: React.FC<DynamicFormProps> = ({ data, onChange, onSubmit, opt
           onChange={onChange}
           label={fieldLabel}
           type={fieldType}
+          id={fullPath}
         />
       ];
     });

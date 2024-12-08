@@ -11,6 +11,7 @@ export enum FormFieldType {
 }
 
 interface DynamicInputProps {
+  id?: string;
   data: any;
   path: string;
   onChange: (newData: any) => void;
