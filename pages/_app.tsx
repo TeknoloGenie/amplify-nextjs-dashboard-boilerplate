@@ -52,6 +52,7 @@ export default function App({ Component, pageProps }: AppProps) {
 						  { path: "/components/dynamic-form", label: "DynamicForm" },
 						  { path: "/components/dynamic-component", label: "DynamicComponent" },
 						  { path: "/components/panel", label: "Panel" },
+						  { path: "/components/nodegeeks-react-wysiwyg-editor", label: "WYSIWYG"}
 						]}
 					  />
 					  <MenuLinks
