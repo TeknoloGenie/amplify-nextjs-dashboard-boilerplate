@@ -1,0 +1,43 @@
+{
+  "name": "amplify-ui-components",
+  "version": "0.1.0",
+  "description": "A collection of reusable React components built with AWS Amplify UI",
+  "main": "dist/index.js",
+  "module": "dist/index.esm.js",
+  "types": "dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "rollup -c",
+    "test": "jest",
+    "prepare": "npm run build"
+  },
+  "peerDependencies": {
+    "@aws-amplify/ui-react": "^6.0.0",
+    "react": "^18.0.0",
+    "react-dom": "^18.0.0"
+  },
+  "devDependencies": {
+    "@rollup/plugin-commonjs": "^24.0.0",
+    "@rollup/plugin-node-resolve": "^15.0.0",
+    "@rollup/plugin-typescript": "^11.0.0",
+    "rollup": "^3.0.0",
+    "rollup-plugin-dts": "^5.0.0",
+    "typescript": "^5.0.0",
+    "@types/react": "^18.0.0"
+  },
+  "keywords": [
+    "react",
+    "amplify",
+    "aws",
+    "ui",
+    "components"
+  ],
+  "author": "",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/yourusername/amplify-ui-components.git"
+  }
+}

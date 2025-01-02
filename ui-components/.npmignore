@@ -1,0 +1,7 @@
+src/
+coverage/
+.gitignore
+rollup.config.js
+tsconfig.json
+*.test.ts
+*.test.tsx
